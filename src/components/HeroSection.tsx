@@ -17,16 +17,16 @@ const HeroSection = () => {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ minHeight: "100svh", maxHeight: "100svh" }}
+      style={{
+        height: "100svh",
+        maxHeight: "100svh",
+        backgroundImage: `url(${heroBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "top center",
+        backgroundRepeat: "no-repeat",
+      }}
       dir="rtl"
     >
-      {/* ── BACKGROUND WOMAN ── */}
-      <img
-        src="/assets/neo-collagen-hero.png"
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover object-top"
-        style={{ zIndex: 0 }}
-      />
 
       {/* ── GRADIENT OVERLAY ── */}
       <div
