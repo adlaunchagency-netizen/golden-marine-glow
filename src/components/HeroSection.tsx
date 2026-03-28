@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useShopifyProduct } from "@/hooks/useShopifyProduct";
-import fallbackImage from "@/assets/neo-collagen-product.png";
+import heroImage from "@/assets/neo-collagen-hero.png";
 
 const HeroSection = () => {
   const { data: product, isLoading } = useShopifyProduct("collagen");
