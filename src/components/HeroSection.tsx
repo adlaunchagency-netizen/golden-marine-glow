@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import heroBg from "@/assets/neo-collagen-hero.png";
+import bottleImg from "@/assets/neo-collagen-product.png";
 const HeroSection = () => {
   const [pulse, setPulse] = useState(false);
 
@@ -16,16 +17,16 @@ const HeroSection = () => {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ minHeight: "100svh", maxHeight: "100svh" }}
+      style={{
+        height: "100svh",
+        maxHeight: "100svh",
+        backgroundImage: `url(${heroBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "top center",
+        backgroundRepeat: "no-repeat",
+      }}
       dir="rtl"
     >
-      {/* ── BACKGROUND WOMAN ── */}
-      <img
-        src="/assets/neo-collagen-hero.png"
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover object-top"
-        style={{ zIndex: 0 }}
-      />
 
       {/* ── GRADIENT OVERLAY ── */}
       <div
@@ -54,16 +55,20 @@ const HeroSection = () => {
 
       {/* ── BOTTLE — large, left side, bottom-anchored ── */}
       <img
-        src="https://cdn.shopify.com/s/files/1/1002/0913/1888/files/f19f9ef9-f69f-4ed4-aa69-aba7cec4fec8.webp?v=1773633264"
+        src={bottleImg}
         alt="Neo Collagen"
-        className="absolute bottom-0 left-0"
+        className="absolute pointer-events-none select-none"
         style={{
-          width: "210px",
+          bottom: "80px",
+          left: "0px",
+          width: "175px",
           objectFit: "contain",
-          zIndex: 3,
+          background: "transparent",
+          backgroundColor: "transparent",
+          mixBlendMode: "normal",
+          zIndex: 5,
           filter:
-            "drop-shadow(0 0 28px rgba(201,151,42,0.75)) drop-shadow(0 12px 20px rgba(0,0,0,0.7))",
-          marginLeft: "-10px",
+            "drop-shadow(0 0 32px rgba(201,151,42,0.8)) drop-shadow(0 16px 24px rgba(0,0,0,0.75))",
         }}
       />
 
