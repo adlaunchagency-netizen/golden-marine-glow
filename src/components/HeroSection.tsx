@@ -5,7 +5,7 @@ import heroImage from "@/assets/neo-collagen-hero.png";
 const HeroSection = () => {
   const { data: product, isLoading } = useShopifyProduct("collagen");
 
-  const productImage = product?.images?.edges?.[0]?.node?.url || fallbackImage;
+  const productImage = heroImage;
   const price = product?.priceRange?.minVariantPrice?.amount
     ? Math.round(parseFloat(product.priceRange.minVariantPrice.amount))
     : 199;

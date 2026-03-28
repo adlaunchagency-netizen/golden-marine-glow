@@ -1,6 +1,6 @@
 import { MessageCircle } from "lucide-react";
 
-const whatsappUrl = "https://wa.me/212XXXXXXXXX?text=" + encodeURIComponent("السلام عليكم، بغيت نعرف أكثر على Neo Collagen");
+const whatsappUrl = "https://wa.me/212709132421?text=Salam,%20bghit%20nsewwel%203la%20Collagen%20Marin";
 
 const WhatsAppButton = () => (
   <a
