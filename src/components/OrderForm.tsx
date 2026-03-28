@@ -39,6 +39,19 @@ const OrderForm = () => {
   const cityRef = useRef<HTMLDivElement>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const filteredCities = cities.filter((c) =>
+    c.toLowerCase().includes(citySearch.toLowerCase())
+  );
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (cityRef.current && !cityRef.current.contains(e.target as Node)) {
+        setCityOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
