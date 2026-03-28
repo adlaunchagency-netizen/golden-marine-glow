@@ -1,53 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 30 10% 15%;
+    --background: 40 60% 96%;
+    --foreground: 36 30% 8%;
 
-    --card: 40 25% 97%;
-    --card-foreground: 30 10% 15%;
+    --card: 40 50% 94%;
+    --card-foreground: 36 30% 8%;
 
-    --popover: 40 20% 98%;
-    --popover-foreground: 30 10% 15%;
+    --popover: 40 60% 96%;
+    --popover-foreground: 36 30% 8%;
 
-    --primary: 38 65% 50%;
-    --primary-foreground: 40 20% 98%;
+    --primary: 40 68% 47%;
+    --primary-foreground: 40 60% 96%;
 
-    --secondary: 38 30% 92%;
-    --secondary-foreground: 30 10% 25%;
+    --secondary: 40 40% 90%;
+    --secondary-foreground: 36 30% 15%;
 
-    --muted: 40 15% 94%;
-    --muted-foreground: 30 8% 55%;
+    --muted: 40 25% 91%;
+    --muted-foreground: 36 15% 45%;
 
-    --accent: 38 45% 85%;
-    --accent-foreground: 30 10% 15%;
+    --accent: 40 50% 85%;
+    --accent-foreground: 36 30% 8%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 38 25% 88%;
-    --input: 38 25% 88%;
-    --ring: 38 65% 50%;
+    --border: 40 30% 85%;
+    --input: 40 30% 85%;
+    --ring: 40 68% 47%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    --gold: 38 65% 50%;
-    --gold-light: 38 60% 75%;
-    --gold-dark: 38 70% 35%;
-    --cream: 40 30% 95%;
-    --cream-dark: 40 20% 90%;
-    --charcoal: 30 10% 20%;
+    --gold: 40 68% 47%;
+    --gold-light: 42 72% 64%;
+    --gold-dark: 38 72% 39%;
+    --dark-bg: 36 30% 6%;
+    --champagne: 44 85% 94%;
 
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Outfit', sans-serif;
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Cairo', sans-serif;
 
-    --shadow-gold: 0 4px 30px -5px hsl(38 65% 50% / 0.15);
-    --shadow-elevated: 0 20px 60px -15px hsl(30 10% 15% / 0.08);
+    --shadow-gold: 0 4px 30px -5px hsl(40 68% 47% / 0.25);
+    --shadow-elevated: 0 20px 60px -15px hsl(36 30% 8% / 0.12);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -67,10 +64,11 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    direction: rtl;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
   }
 }
 
@@ -83,10 +81,16 @@
   }
   .text-gold-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)), hsl(var(--gold-light)));
+    background-image: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
   }
   .bg-gold-gradient {
-    background-image: linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)));
+    background-image: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
+  }
+  .bg-dark {
+    background-color: hsl(var(--dark-bg));
+  }
+  .bg-champagne {
+    background-color: hsl(var(--champagne));
   }
   .border-gold {
     border-color: hsl(var(--gold-light));
@@ -94,5 +98,13 @@
   .divider-gold {
     @apply w-16 h-px mx-auto;
     background: linear-gradient(90deg, transparent, hsl(var(--gold)), transparent);
+  }
+
+  @keyframes pulse-whatsapp {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    50% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+  }
+  .animate-pulse-whatsapp {
+    animation: pulse-whatsapp 2s ease-in-out infinite;
   }
 }

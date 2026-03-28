@@ -1,32 +1,32 @@
-import { Droplets, Sparkles, Heart, Leaf } from "lucide-react";
+import { Sparkles, Droplets, Shield, Leaf } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const benefits = [
-  { icon: Sparkles, title: "Radiant Skin", desc: "Boost elasticity and hydration for a youthful, dewy glow from within." },
-  { icon: Droplets, title: "Deep Hydration", desc: "Bioavailable peptides that penetrate deep for lasting moisture." },
-  { icon: Heart, title: "Joint Support", desc: "Strengthen cartilage and support flexible, pain-free movement." },
-  { icon: Leaf, title: "Sustainably Sourced", desc: "Wild-caught from pristine Nordic waters, never farmed." },
+  { icon: Sparkles, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك." },
+  { icon: Droplets, title: "ترطيب عميق", desc: "ببتيدات بحرية عالية الامتصاص تغذي البشرة من الداخل." },
+  { icon: Shield, title: "شعر وأظافر أقوى", desc: "يقوي بصيلات الشعر والأظافر ويحميها من التكسر." },
+  { icon: Leaf, title: "طبيعي 100%", desc: "مستخلص من أسماك برية، بدون مواد كيميائية أو حافظات." },
 ];
 
 const BenefitsSection = () => (
-  <section id="benefits" className="py-24 md:py-32 bg-cream">
+  <section id="benefits" className="py-20 md:py-28 bg-champagne">
     <div className="container">
-      <AnimatedSection className="text-center mb-16 md:mb-20">
-        <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">Why Océane</p>
-        <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
-          Nature's Most Potent <span className="italic text-gold-gradient">Elixir</span>
+      <AnimatedSection className="text-center mb-14">
+        <p className="font-body text-sm tracking-wider text-gold-dark font-medium mb-3">علاش Neo Collagen؟</p>
+        <h2 className="font-body text-3xl md:text-4xl font-bold text-foreground mb-4">
+          فوائد <span className="text-gold-gradient">مثبتة علمياً</span>
         </h2>
         <div className="divider-gold mt-6" />
       </AnimatedSection>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {benefits.map((b, i) => (
-          <AnimatedSection key={b.title} delay={i * 0.1} className="text-center group">
-            <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-accent flex items-center justify-center group-hover:bg-gold-light/20 transition-colors">
+          <AnimatedSection key={b.title} delay={i * 0.1} className="text-center group bg-background p-6 rounded-xl border border-border hover:border-gold/40 transition-colors">
+            <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
               <b.icon className="w-6 h-6 text-gold" />
             </div>
-            <h3 className="font-display text-xl font-medium text-foreground mb-2">{b.title}</h3>
-            <p className="font-body text-sm text-muted-foreground leading-relaxed font-light">{b.desc}</p>
+            <h3 className="font-body text-lg font-bold text-foreground mb-2">{b.title}</h3>
+            <p className="font-body text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
           </AnimatedSection>
         ))}
       </div>

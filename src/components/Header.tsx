@@ -2,37 +2,40 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const navLinks = ["About", "Benefits", "Ingredients", "Testimonials"];
-
 const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/95 backdrop-blur-md border-b border-gold/20">
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="font-display text-2xl md:text-3xl font-semibold tracking-wide text-foreground">
-          OCÉANE
+        <a href="#" className="font-display text-2xl md:text-3xl font-semibold tracking-wide text-gold-light">
+          PARAVITA
         </a>
 
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {[
+            { label: "المزايا", href: "#benefits" },
+            { label: "العروض", href: "#pricing" },
+            { label: "آراء الزبونات", href: "#testimonials" },
+            { label: "اطلبي الآن", href: "#order" },
+          ].map((link) => (
             <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="font-body text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
+              key={link.href}
+              href={link.href}
+              className="font-body text-sm font-medium text-gold-light/80 hover:text-gold-light transition-colors"
             >
-              {link}
+              {link.label}
             </a>
           ))}
           <a
-            href="#shop"
-            className="bg-gold-gradient text-primary-foreground font-body text-sm tracking-widest uppercase px-6 py-2.5 hover:opacity-90 transition-opacity"
+            href="#order"
+            className="bg-gold-gradient text-dark-bg font-body text-sm font-bold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
           >
-            Shop Now
+            اطلبي الآن
           </a>
         </nav>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground" aria-label="Menu">
+        <button onClick={() => setOpen(!open)} className="md:hidden text-gold-light" aria-label="Menu">
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -43,21 +46,29 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-b border-border overflow-hidden"
+            className="md:hidden bg-dark-bg border-b border-gold/20 overflow-hidden"
           >
             <nav className="flex flex-col items-center gap-6 py-8">
-              {navLinks.map((link) => (
+              {[
+                { label: "المزايا", href: "#benefits" },
+                { label: "العروض", href: "#pricing" },
+                { label: "آراء الزبونات", href: "#testimonials" },
+              ].map((link) => (
                 <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
+                  key={link.href}
+                  href={link.href}
                   onClick={() => setOpen(false)}
-                  className="font-body text-sm tracking-widest uppercase text-muted-foreground"
+                  className="font-body text-base font-medium text-gold-light/80"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
-              <a href="#shop" className="bg-gold-gradient text-primary-foreground font-body text-sm tracking-widest uppercase px-8 py-3">
-                Shop Now
+              <a
+                href="#order"
+                onClick={() => setOpen(false)}
+                className="bg-gold-gradient text-dark-bg font-body text-base font-bold px-8 py-3 rounded-lg"
+              >
+                اطلبي الآن
               </a>
             </nav>
           </motion.div>
