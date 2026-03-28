@@ -47,7 +47,7 @@ const OrderForm = () => {
 
     setLoading(true);
     try {
-      const { error: dbError } = await supabase.from("orders").insert({
+      const { error: dbError } = await (supabase as any).from("orders").insert({
         customer_name: form.customer_name.trim(),
         phone: form.phone.trim(),
         city: form.city,
