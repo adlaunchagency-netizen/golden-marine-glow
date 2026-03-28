@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import heroBg from "@/assets/neo-collagen-hero.png";
 
 const BOTTLE_URL =
-  "https://cdn.shopify.com/s/files/1/1002/0913/1888/files/" + "f19f9ef9-f69f-4ed4-aa69-aba7cec4fec8.webp?v=1773633264";
+  "https://cdn.shopify.com/s/files/1/1002/0913/1888/files/f19f9ef9-f69f-4ed4-aa69-aba7cec4fec8.webp?v=1773633264";
 
 const HeroSection = () => {
   const [ctaPulse, setCtaPulse] = useState(false);
