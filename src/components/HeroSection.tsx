@@ -4,7 +4,7 @@ const Hero = () => {
       {/* Background — woman photo */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/hero-woman.jpg')" }}
+        style={{ backgroundImage: "url('/src/assets/neo-collagen-hero.png')" }}
       />
 
       {/* Dark overlay for text readability */}
