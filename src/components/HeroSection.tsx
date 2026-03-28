@@ -105,7 +105,7 @@ const HeroSection = () => {
           <p
             className="text-sm leading-relaxed mb-5"
             style={{
-              color: "rgba(255,255,255,0.85)",
+              color: "#E8C460",
               textShadow: "0 1px 8px rgba(0,0,0,0.95)",
               fontFamily: "'Cairo', sans-serif",
               maxWidth: "340px",
