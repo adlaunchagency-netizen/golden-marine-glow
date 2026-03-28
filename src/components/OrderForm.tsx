@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const cities = [
-  "الدار البيضاء", "الرباط", "مراكش", "فاس", "طنجة", "أكادير",
-  "مكناس", "سلا", "وجدة", "القنيطرة", "تطوان", "الجديدة",
-  "خنيفرة", "بني ملال", "الناظور", "العيون", "أخرى"
+  "Casablanca", "Rabat", "Marrakech", "Fès", "Tanger", "Agadir",
+  "Meknès", "Salé", "Oujda", "Kénitra", "Tétouan", "El Jadida",
+  "Khénifra", "Beni Mellal", "Nador", "Laâyoune", "Safi", "Mohammedia",
+  "Khouribga", "Settat", "Berrechid", "Taza", "Errachidia", "Guelmim",
+  "Ifrane", "Essaouira", "Taroudant", "Ouarzazate", "Dakhla", "Tiznit",
+  "Al Hoceima", "Larache", "Sidi Kacem", "Sidi Slimane", "Azrou",
+  "Midelt", "Tan-Tan", "Chefchaouen", "Taounate", "Boulemane",
+  "Autre"
 ];
 
 const offers = [
