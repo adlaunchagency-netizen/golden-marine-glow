@@ -28,9 +28,9 @@ const citySecteurs: Record<string, string[]> = {
 };
 
 const offers = [
-  { label: "1 علبة — 199 درهم", value: "1-box-199" },
-  { label: "3 علب + سيروم — 299 درهم", value: "3-boxes-299" },
-  { label: "4 علب + 2 سيروم — 399 درهم", value: "4-boxes-399" },
+  { label: "عبوة واحدة — بدون هدية", value: "1-box-199", price: 199, description: "شهر كامل من العلاج" },
+  { label: "⭐ 3 علب + سيروم هدية مجانية", value: "3-boxes-299", price: 299, description: "ننصح به — سيروم كولاجين 30ml مجاناً مع طلبك", recommended: true },
+  { label: "☆ 4 علب + 2 سيروم هدية", value: "4-boxes-399", price: 399, description: "الأفضل قيمة — سيرومان كولاجين 30ml مجاناً مع طلبك" },
 ];
 
 const offerPriceMap: Record<string, number> = {
@@ -96,13 +96,16 @@ const OrderForm = () => {
 
     setLoading(true);
     try {
+      const selectedOffer = offers.find(o => o.value === form.offer);
       const { error: dbError } = await (supabase as any).from("orders").insert({
         customer_name: form.customer_name.trim(),
         phone: form.phone.trim(),
         city: form.city,
         secteur: form.secteur || null,
-        offer_price: offerPriceMap[form.offer],
-        product: "Neo Collagen",
+        offer_price: selectedOffer?.price || offerPriceMap[form.offer],
+        offer_label: selectedOffer?.label || form.offer,
+        product: "Paravita Neo Collagen",
+        created_at: new Date().toISOString(),
       } as any);
 
       if (dbError) throw dbError;
@@ -263,7 +266,7 @@ const OrderForm = () => {
               className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body focus:outline-none focus:border-gold transition-colors appearance-none"
             >
               {offers.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
+                <option key={o.value} value={o.value}>{o.label} — {o.price} درهم</option>
               ))}
             </select>
           </div>

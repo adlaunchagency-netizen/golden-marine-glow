@@ -7,38 +7,44 @@ import bundle4 from "@/assets/bundle-4.png";
 const tiers = [
   {
     id: 1,
-    name: "عرض المجربة",
+    name: "عبوة واحدة",
     subtitle: "Starter Pack",
-    boxes: "1 علبة",
+    boxes: "1 علبة كبسولات — 60 كبسولة (شهر كامل)",
     price: 199,
+    oldPrice: null,
+    savingsBadge: null,
     offerValue: "1-box-199",
-    features: ["كولاجين بحري 10,000mg", "شهر كامل", "توصيل مجاني"],
+    features: ["شهر كامل من العلاج", "توصيل مجاني", "الدفع عند الاستلام"],
     featured: false,
     badge: null,
     image: bundle1,
   },
   {
     id: 2,
-    name: "الأكثر طلباً",
+    name: "⭐ 3 علب + سيروم هدية",
     subtitle: "Best Value",
-    boxes: "3 علب + سيروم هدية",
+    boxes: "3 علب كبسولات + سيروم كولاجين 30ml مجاناً",
     price: 299,
+    oldPrice: 596,
+    savingsBadge: "وفري 50% — الكمية محدودة",
     offerValue: "3-boxes-299",
-    features: ["كولاجين بحري 10,000mg", "3 أشهر", "سيروم كولاجين مجاناً", "توصيل مجاني"],
+    features: ["3 أشهر من العلاج الكامل", "سيروم كولاجين 30ml — هدية مجانية", "توصيل مجاني لجميع مدن المغرب", "الدفع عند الاستلام — بدون دفع مسبق"],
     featured: true,
-    badge: "⭐ توفير 62%",
+    badge: "⭐ الأكثر مبيعاً",
     image: bundle3,
   },
   {
     id: 3,
-    name: "عرض العائلة",
+    name: "☆ 4 علب + 2 سيروم هدية",
     subtitle: "Family Pack",
-    boxes: "4 علب + 2 سيروم هدية",
+    boxes: "4 علب كبسولات + 2 سيروم كولاجين 30ml مجاناً",
     price: 399,
+    oldPrice: 796,
+    savingsBadge: "وفري 50% — أفضل اختيار",
     offerValue: "4-boxes-399",
-    features: ["كولاجين بحري 10,000mg", "4 أشهر", "2 سيروم كولاجين مجاناً", "توصيل مجاني", "أفضل قيمة"],
+    features: ["4 أشهر من النتائج الدائمة", "سيرومان كولاجين 30ml — هديتان مجانيتان", "أفضل اختيار للنتائج المثلى والدائمة", "توصيل مجاني + الدفع عند الاستلام"],
     featured: false,
-    badge: "💎 توفير 66%",
+    badge: "💎 الأفضل قيمة",
     image: bundle4,
   },
 ];
@@ -115,10 +121,17 @@ const PricingSection = () => (
             <p className="font-body text-xs text-gold-light/50 mb-1 text-center">{tier.subtitle}</p>
             <p className="font-body text-sm text-gold-light/60 mb-4 text-center">{tier.boxes}</p>
 
-            <div className="mb-6 text-center">
+            <div className="mb-2 text-center">
+              {tier.oldPrice && (
+                <span className="font-body text-base text-gold-light/40 line-through mr-2">{tier.oldPrice} درهم</span>
+              )}
               <span className="font-body text-4xl font-extrabold text-gold-light">{tier.price}</span>
               <span className="font-body text-base text-gold-light/60 mr-1">درهم</span>
             </div>
+            {tier.savingsBadge && (
+              <p className="text-center text-xs font-bold text-gold mb-4">{tier.savingsBadge}</p>
+            )}
+            {!tier.savingsBadge && <div className="mb-4" />}
 
             <ul className="space-y-3 mb-8 flex-1">
               {tier.features.map((f) => (
