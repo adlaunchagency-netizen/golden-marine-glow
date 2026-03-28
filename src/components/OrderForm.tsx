@@ -34,6 +34,9 @@ const OrderForm = () => {
     offer: "3-boxes-299",
   });
   const [loading, setLoading] = useState(false);
+  const [citySearch, setCitySearch] = useState("");
+  const [cityOpen, setCityOpen] = useState(false);
+  const cityRef = useRef<HTMLDivElement>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
