@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import heroBg from "@/assets/neo-collagen-hero.png";
+import bottleImg from "@/assets/neo-collagen-product.png";
 const HeroSection = () => {
   const [pulse, setPulse] = useState(false);
 
