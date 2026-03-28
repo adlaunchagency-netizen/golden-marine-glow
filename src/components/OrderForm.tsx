@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const cities = [
-  "الدار البيضاء", "الرباط", "مراكش", "فاس", "طنجة", "أكادير",
-  "مكناس", "سلا", "وجدة", "القنيطرة", "تطوان", "الجديدة",
-  "خنيفرة", "بني ملال", "الناظور", "العيون", "أخرى"
+  "Casablanca", "Rabat", "Marrakech", "Fès", "Tanger", "Agadir",
+  "Meknès", "Salé", "Oujda", "Kénitra", "Tétouan", "El Jadida",
+  "Khénifra", "Beni Mellal", "Nador", "Laâyoune", "Safi", "Mohammedia",
+  "Khouribga", "Settat", "Berrechid", "Taza", "Errachidia", "Guelmim",
+  "Ifrane", "Essaouira", "Taroudant", "Ouarzazate", "Dakhla", "Tiznit",
+  "Al Hoceima", "Larache", "Sidi Kacem", "Sidi Slimane", "Azrou",
+  "Midelt", "Tan-Tan", "Chefchaouen", "Taounate", "Boulemane",
+  "Autre"
 ];
 
 const offers = [
@@ -28,8 +34,24 @@ const OrderForm = () => {
     offer: "3-boxes-299",
   });
   const [loading, setLoading] = useState(false);
+  const [citySearch, setCitySearch] = useState("");
+  const [cityOpen, setCityOpen] = useState(false);
+  const cityRef = useRef<HTMLDivElement>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const filteredCities = cities.filter((c) =>
+    c.toLowerCase().includes(citySearch.toLowerCase())
+  );
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (cityRef.current && !cityRef.current.contains(e.target as Node)) {
+        setCityOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,19 +154,62 @@ const OrderForm = () => {
             />
           </div>
 
-          {/* City */}
-          <div>
+          {/* City - Searchable Dropdown */}
+          <div ref={cityRef} className="relative">
             <label className="block font-body text-sm font-medium text-champagne mb-2">المدينة *</label>
-            <select
-              value={form.city}
-              onChange={(e) => setForm({ ...form, city: e.target.value })}
-              className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body focus:outline-none focus:border-gold transition-colors appearance-none"
+            <button
+              type="button"
+              onClick={() => { setCityOpen(!cityOpen); setCitySearch(""); }}
+              className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body focus:outline-none focus:border-gold transition-colors flex items-center justify-between"
             >
-              <option value="">اختاري المدينة</option>
-              {cities.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
+              <span className={form.city ? "text-champagne" : "text-gold-light/30"}>
+                {form.city || "اختاري المدينة"}
+              </span>
+              <ChevronDown className={`w-4 h-4 text-gold-light/50 transition-transform ${cityOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {cityOpen && (
+              <div className="absolute z-50 top-full mt-1 w-full bg-dark-bg border border-gold/30 rounded-xl overflow-hidden shadow-lg max-h-60">
+                {/* Search input */}
+                <div className="flex items-center gap-2 px-3 py-2 border-b border-gold/20">
+                  <Search className="w-4 h-4 text-gold-light/40 shrink-0" />
+                  <input
+                    type="text"
+                    value={citySearch}
+                    onChange={(e) => setCitySearch(e.target.value)}
+                    placeholder="ابحثي عن مدينتك..."
+                    autoFocus
+                    className="w-full bg-transparent text-champagne font-body text-sm placeholder:text-gold-light/30 focus:outline-none"
+                  />
+                </div>
+                {/* City list */}
+                <ul className="overflow-y-auto max-h-48">
+                  {filteredCities.length === 0 ? (
+                    <li className="px-4 py-3 text-sm text-gold-light/40 font-body">لا توجد نتائج</li>
+                  ) : (
+                    filteredCities.map((c) => (
+                      <li key={c}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setForm({ ...form, city: c });
+                            setCityOpen(false);
+                            setCitySearch("");
+                          }}
+                          className={`w-full text-right px-4 py-3 text-sm font-body transition-colors ${
+                            form.city === c
+                              ? "bg-gold/20 text-gold-light"
+                              : "text-champagne/80 hover:bg-gold/10"
+                          }`}
+                        >
+                          {c}
+                        </button>
+                      </li>
+                    ))
+                  )}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* Offer */}
