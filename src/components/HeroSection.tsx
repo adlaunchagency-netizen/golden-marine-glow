@@ -1,10 +1,13 @@
+import heroBackground from "@/assets/neo-collagen-hero.png";
+import bottleImage from "@/assets/neo-collagen-product.png";
+
 const Hero = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Background — woman photo */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/hero-woman.jpg')" }}
+        style={{ backgroundImage: `url('${heroBackground}')` }}
       />
 
       {/* Dark overlay for text readability */}
@@ -21,7 +24,7 @@ const Hero = () => {
 
       {/* Bottle image — floats over everything, bottom-right */}
       <img
-        src="/bottle.png"
+        src={bottleImage}
         alt="Paravita Neo Collagen"
         className="absolute bottom-0 right-0 w-40 object-contain pointer-events-none"
         style={{
