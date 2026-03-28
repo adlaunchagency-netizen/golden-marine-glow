@@ -14,6 +14,14 @@ const floatingAnimation = {
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-dark-bg">
+      {/* Mobile: Woman as full background with dark overlay */}
+      <div
+        className="absolute inset-0 md:hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroWoman})` }}
+      >
+        <div className="absolute inset-0 bg-dark-bg/70" />
+      </div>
+
       {/* Radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--gold)/0.08),transparent_70%)]" />
 
@@ -25,15 +33,24 @@ const HeroSection = () => {
           transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-center md:text-right order-2 md:order-1"
         >
-          <p className="font-body text-sm tracking-wider text-gold-light/70 mb-4 font-medium">
+          <p
+            className="font-body text-sm tracking-wider text-gold-light/70 mb-4 font-medium"
+            style={{ textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}
+          >
             كولاجين بحري طبيعي 100%
           </p>
-          <h1 className="font-body text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.2] text-champagne mb-6">
+          <h1
+            className="font-body text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.2] text-champagne mb-6"
+            style={{ textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}
+          >
             بشرة مشرقة
             <br />
             <span className="text-gold-gradient">من أعماق البحر</span>
           </h1>
-          <p className="font-body text-base md:text-lg text-gold-light/60 max-w-md mx-auto md:mx-0 md:mr-0 mb-6 leading-relaxed">
+          <p
+            className="font-body text-base md:text-lg text-gold-light/60 max-w-md mx-auto md:mx-0 md:mr-0 mb-6 leading-relaxed"
+            style={{ textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}
+          >
             Neo Collagen من Paravita — ببتيدات الكولاجين البحري اللي غادي تعطيك بشرة صافية، شعر قوي، وأظافر متينة.
           </p>
 
@@ -52,7 +69,7 @@ const HeroSection = () => {
           </a>
         </motion.div>
 
-        {/* Hero visual: Woman + Floating Bottle */}
+        {/* Hero visual: Woman + Floating Bottle — desktop only for woman, bottle always visible */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -64,8 +81,8 @@ const HeroSection = () => {
             <div className="w-56 sm:w-64 md:w-72 lg:w-80 aspect-square rounded-full bg-gold/15 blur-3xl" />
           </div>
 
-          {/* Woman image */}
-          <div className="relative z-10 flex items-end justify-center">
+          {/* Woman image — desktop only */}
+          <div className="relative z-10 hidden md:flex items-end justify-center">
             <img
               src={heroWoman}
               alt="بشرة مشرقة مع Neo Collagen"
@@ -77,20 +94,21 @@ const HeroSection = () => {
                 WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
               }}
             />
-
-            {/* Floating bottle overlaid */}
-            <motion.img
-              src={heroBottle}
-              alt="Paravita Neo Collagen"
-              width={800}
-              height={1024}
-              animate={floatingAnimation}
-              className="absolute -left-4 sm:-left-8 bottom-4 w-28 sm:w-32 md:w-36 lg:w-40 object-contain z-20"
-              style={{
-                filter: "drop-shadow(0 0 30px rgba(212, 175, 55, 0.3))",
-              }}
-            />
           </div>
+
+          {/* Floating bottle — positioned absolute bottom-right, overlaps next section slightly */}
+          <motion.img
+            src={heroBottle}
+            alt="Paravita Neo Collagen"
+            width={800}
+            height={1024}
+            animate={floatingAnimation}
+            className="absolute -bottom-8 left-0 md:left-auto md:-left-8 w-28 sm:w-32 md:w-36 lg:w-40 object-contain z-20"
+            style={{
+              filter: "drop-shadow(0 0 30px rgba(212, 175, 55, 0.3))",
+              background: "transparent",
+            }}
+          />
         </motion.div>
       </div>
 
