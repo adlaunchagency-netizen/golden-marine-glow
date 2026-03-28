@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import heroBg from "@/assets/neo-collagen-hero.png";
 
 const TICKER_ITEMS = [
   "⭐ +10,000 سيدة مغربية وثقن في نيو كولاجين",
@@ -17,6 +16,24 @@ const RESULTS = [
   { ar: "راحة المفاصل", sub: "من الأسبوع الأول" },
 ];
 
+const BOTTLE_URL =
+  "https://cdn.shopify.com/s/files/1/1002/0913/1888/files/" + "f19f9ef9-f69f-4ed4-aa69-aba7cec4fec8.webp?v=1773633264";
+
+/* ── TOKEN PALETTE — inspired from old LP warm champagne ── */
+const C = {
+  gold: "#B8860B",
+  goldLight: "#D4AF37",
+  goldBright: "#E8C460",
+  champagne: "#F5E6C0",
+  champagnePale: "#FDF6E3",
+  dark: "#1A1208",
+  darkWarm: "#2D1E04",
+  muted: "#6B4E1A",
+  redBadge: "#8B1A0A",
+  redText: "#C0392B",
+  white: "#FFFFFF",
+};
+
 const HeroSection = () => {
   const [tickerPos, setTickerPos] = useState(0);
   const [activeResult, setActiveResult] = useState(0);
@@ -25,30 +42,30 @@ const HeroSection = () => {
   const rafRef = useRef<number>(0);
   const posRef = useRef(0);
 
-  /* ── Ticker RAF ── */
+  /* ── ticker RAF ── */
   useEffect(() => {
-    const animate = () => {
-      posRef.current += 0.4;
-      const half = (tickerRef.current?.scrollWidth ?? 1200) / 2;
+    const run = () => {
+      posRef.current += 0.42;
+      const half = (tickerRef.current?.scrollWidth ?? 1400) / 2;
       if (posRef.current >= half) posRef.current = 0;
       setTickerPos(posRef.current);
-      rafRef.current = requestAnimationFrame(animate);
+      rafRef.current = requestAnimationFrame(run);
     };
-    rafRef.current = requestAnimationFrame(animate);
+    rafRef.current = requestAnimationFrame(run);
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
-  /* ── Result card cycle ── */
+  /* ── result cycling ── */
   useEffect(() => {
     const t = setInterval(() => setActiveResult((i) => (i + 1) % RESULTS.length), 2400);
     return () => clearInterval(t);
   }, []);
 
-  /* ── CTA pulse ── */
+  /* ── CTA heartbeat ── */
   useEffect(() => {
     const t = setInterval(() => {
       setCtaPulse(true);
-      setTimeout(() => setCtaPulse(false), 600);
+      setTimeout(() => setCtaPulse(false), 550);
     }, 4000);
     return () => clearInterval(t);
   }, []);
@@ -56,80 +73,141 @@ const HeroSection = () => {
   const scrollToOrder = () => document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section dir="rtl" className="relative w-full overflow-hidden" style={{ height: "100svh" }}>
-      {/* ── 0. BACKGROUND WOMAN ── */}
-      <img
-        src={heroBg}
-        alt=""
+    <section dir="rtl" className="relative w-full overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
+      {/* ══════════════════════════════════════════
+          LAYER 0 — WARM CHAMPAGNE BACKGROUND
+          Matches old LP's golden warmth.
+          Woman photo sits on top as object-cover.
+          No dark overlay needed — light bg = face visible.
+      ══════════════════════════════════════════ */}
+      <div
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
-        style={{ zIndex: 0 }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          /* warm champagne-to-gold gradient — exact old LP feel */
+          background: "linear-gradient(145deg," + "#FDF0CC 0%," + "#F5E0A0 30%," + "#E8C860 65%," + "#C9A030 100%)",
+        }}
       />
 
-      {/* ── 1. CINEMATIC OVERLAY ── */}
+      {/* ══════════════════════════════════════════
+          LAYER 1 — WOMAN PHOTO
+          Covers right 60% only, fades left edge.
+          This mimics the old LP where woman face
+          fills the right while text lives on left.
+      ══════════════════════════════════════════ */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
         style={{
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          /* woman occupies right 65% of screen */
+          right: 0,
+          width: "65%",
           zIndex: 1,
-          background: [
-            "linear-gradient(to bottom,",
-            "rgba(5,2,0,0.90) 0%,",
-            "rgba(5,2,0,0.38) 30%,",
-            "rgba(5,2,0,0.25) 52%,",
-            "rgba(5,2,0,0.72) 74%,",
-            "rgba(5,2,0,0.97) 100%)",
-          ].join(" "),
+          backgroundImage: "url('/assets/neo-collagen-hero.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          backgroundRepeat: "no-repeat",
+          /* fade her left edge into the champagne bg seamlessly */
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 28%)",
+          maskImage: "linear-gradient(to right, transparent 0%, black 28%)",
         }}
       />
 
-      {/* ── 2. GOLD GLOW behind bottle ── */}
+      {/* ══════════════════════════════════════════
+          LAYER 2 — SUBTLE BOTTOM FADE
+          Darkens only the very bottom so CTAs
+          stay readable regardless of photo.
+      ══════════════════════════════════════════ */}
       <div
         aria-hidden="true"
-        className="absolute bottom-0 right-0 pointer-events-none"
         style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "38%",
           zIndex: 2,
-          width: "55vw",
-          maxWidth: "320px",
-          height: "55vw",
-          maxHeight: "320px",
           background:
-            "radial-gradient(ellipse at center, rgba(201,151,42,0.52) 0%, rgba(201,151,42,0.16) 48%, transparent 72%)",
-          transform: "translate(22%, 22%)",
+            "linear-gradient(to top," + "rgba(26,12,2,0.72) 0%," + "rgba(26,12,2,0.28) 55%," + "transparent 100%)",
+          pointerEvents: "none",
         }}
       />
 
-      {/* ── 3. BOTTLE — right, bottom, BEHIND text ── */}
-      <img
-        src="https://cdn.shopify.com/s/files/1/1002/0913/1888/files/f19f9ef9-f69f-4ed4-aa69-aba7cec4fec8.webp?v=1773633264"
-        alt="Paravita Neo Collagen"
-        className="absolute bottom-0 right-0 pointer-events-none select-none"
-        style={{
-          zIndex: 3,
-          /* ── SIZE: never taller than 58% of viewport ── */
-          width: "42vw",
-          maxWidth: "210px",
-          height: "auto",
-          maxHeight: "58vh",
-          objectFit: "contain",
-          objectPosition: "bottom right",
-          /* push flush to bottom-right corner */
-          marginBottom: 0,
-          marginRight: 0,
-          filter: "drop-shadow(0 0 28px rgba(201,151,42,0.75))" + " drop-shadow(0 14px 22px rgba(0,0,0,0.70))",
-        }}
-      />
-
-      {/* ── 4. SCROLLING TRUST TICKER ── */}
+      {/* ══════════════════════════════════════════
+          LAYER 3 — GOLD RADIAL GLOW (behind bottle)
+      ══════════════════════════════════════════ */}
       <div
-        className="absolute top-0 left-0 right-0 overflow-hidden pointer-events-none"
+        aria-hidden="true"
         style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          zIndex: 3,
+          width: "55vw",
+          maxWidth: "280px",
+          height: "55vw",
+          maxHeight: "280px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(ellipse at center," +
+            "rgba(201,151,42,0.45) 0%," +
+            "rgba(201,151,42,0.14) 50%," +
+            "transparent 72%)",
+          transform: "translate(-25%, 25%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* ══════════════════════════════════════════
+          LAYER 4 — BOTTLE
+          Bottom-LEFT — mirrors old LP where products
+          sit in the lower portion, woman on right.
+          z-3 keeps it behind text (z-20).
+      ══════════════════════════════════════════ */}
+      <img
+        src={BOTTLE_URL}
+        alt="Paravita Neo Collagen"
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          zIndex: 4,
+          width: "36vw",
+          maxWidth: "180px",
+          height: "auto",
+          maxHeight: "55vh",
+          objectFit: "contain",
+          objectPosition: "bottom left",
+          background: "transparent",
+          pointerEvents: "none",
+          userSelect: "none",
+          filter: "drop-shadow(0 0 24px rgba(201,151,42,0.70))" + " drop-shadow(0 10px 18px rgba(0,0,0,0.35))",
+        }}
+      />
+
+      {/* ══════════════════════════════════════════
+          LAYER 5 — SCROLLING TICKER (top strip)
+          Dark gold on champagne — readable on light bg.
+      ══════════════════════════════════════════ */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
           zIndex: 10,
           height: "30px",
+          overflow: "hidden",
           display: "flex",
           alignItems: "center",
-          background: "rgba(201,151,42,0.13)",
-          borderBottom: "1px solid rgba(201,151,42,0.28)",
-          backdropFilter: "blur(6px)",
+          background: "rgba(26,12,2,0.82)",
+          borderBottom: `1px solid ${C.goldLight}`,
+          pointerEvents: "none",
         }}
       >
         <div
@@ -147,8 +225,8 @@ const HeroSection = () => {
               style={{
                 fontSize: "11px",
                 fontWeight: 700,
-                color: "#E8C460",
-                padding: "0 24px",
+                color: C.goldBright,
+                padding: "0 22px",
                 fontFamily: "'Cairo', sans-serif",
               }}
             >
@@ -158,32 +236,39 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* ── 5. MAIN CONTENT — left column, z-20, max-w keeps it from bottle ── */}
+      {/* ══════════════════════════════════════════
+          LAYER 6 — ALL TEXT + CTAs
+          z-20 — always above bottle and photo.
+          RIGHT side of screen (RTL = text on right).
+          paddingLeft pushes text away from bottle zone.
+      ══════════════════════════════════════════ */}
       <div
-        className="absolute inset-0 flex flex-col justify-between"
         style={{
+          position: "absolute",
+          inset: 0,
           zIndex: 20,
-          /* top clears the ticker; bottom leaves thumb room for CTA */
-          paddingTop: "52px",
-          paddingBottom: "24px",
-          /* right padding = bottle width + small gap so text never overlaps */
-          paddingRight: "calc(42vw + 8px)",
-          paddingLeft: "18px",
-          maxWidth: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          paddingTop: "44px",
+          paddingBottom: "20px",
+          /* text lives in RIGHT portion — safe from bottle on left */
+          paddingLeft: "calc(36vw + 12px)",
+          paddingRight: "14px",
         }}
       >
-        {/* ── TOP: badges + headline + proof ── */}
+        {/* ── TOP BLOCK ── */}
         <div>
-          {/* Age-science urgency badge */}
+          {/* Science urgency badge — dark text on champagne */}
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "7px",
-              background: "rgba(192,57,43,0.20)",
-              border: "1px solid rgba(192,57,43,0.48)",
+              background: "rgba(139,26,10,0.12)",
+              border: `1px solid rgba(192,57,43,0.45)`,
               borderRadius: "20px",
-              padding: "4px 11px",
+              padding: "4px 12px",
               marginBottom: "10px",
             }}
           >
@@ -192,17 +277,17 @@ const HeroSection = () => {
                 width: "6px",
                 height: "6px",
                 borderRadius: "50%",
-                background: "#E74C3C",
-                boxShadow: "0 0 6px #E74C3C",
+                background: C.redText,
+                boxShadow: `0 0 5px ${C.redText}`,
                 display: "inline-block",
                 flexShrink: 0,
               }}
             />
             <span
               style={{
-                fontSize: "10.5px",
+                fontSize: "10px",
                 fontWeight: 700,
-                color: "#F1948A",
+                color: C.redText,
                 fontFamily: "'Cairo', sans-serif",
                 lineHeight: 1.3,
               }}
@@ -211,41 +296,42 @@ const HeroSection = () => {
             </span>
           </div>
 
-          {/* Darija emotional hook */}
+          {/* Darija hook — dark warm */}
           <p
             style={{
               fontSize: "12px",
               fontWeight: 600,
-              color: "#C8A96E",
+              color: C.darkWarm,
               marginBottom: "5px",
-              textShadow: "0 1px 8px rgba(0,0,0,1)",
               fontFamily: "'Cairo', sans-serif",
             }}
           >
             واش عيّيتي تشوفي بشرتك تتغير؟
           </p>
 
-          {/* POWER HEADLINE */}
+          {/* H1 — dark gold like old LP */}
           <h1
             style={{
-              fontSize: "clamp(32px, 9.5vw, 46px)",
+              fontSize: "clamp(30px, 9vw, 46px)",
               fontWeight: 900,
-              lineHeight: 1,
-              color: "#E8C460",
-              textShadow: "0 2px 28px rgba(0,0,0,1), 0 0 48px rgba(201,151,42,0.4)",
+              lineHeight: 0.95,
+              color: C.dark,
               fontFamily: "'Cairo', sans-serif",
               marginBottom: "3px",
+              /* subtle text shadow for depth on champagne */
+              textShadow: "0 1px 0 rgba(255,255,255,0.5)",
             }}
           >
             بشرة مشرقة
           </h1>
+
+          {/* H2 — gold accent like old LP */}
           <h2
             style={{
-              fontSize: "clamp(22px, 7vw, 36px)",
+              fontSize: "clamp(20px, 6.5vw, 34px)",
               fontWeight: 900,
               lineHeight: 1.15,
-              color: "#FFFFFF",
-              textShadow: "0 2px 24px rgba(0,0,0,1)",
+              color: C.gold,
               fontFamily: "'Cairo', sans-serif",
               marginBottom: "12px",
             }}
@@ -253,23 +339,22 @@ const HeroSection = () => {
             من أعماق البحر
           </h2>
 
-          {/* Stars + count */}
+          {/* Stars */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "7px",
-              marginBottom: "12px",
+              gap: "6px",
+              marginBottom: "11px",
               flexWrap: "wrap",
             }}
           >
-            <span style={{ color: "#E8C460", fontSize: "13px", letterSpacing: "-1px" }}>⭐⭐⭐⭐⭐</span>
+            <span style={{ color: C.goldLight, fontSize: "13px", letterSpacing: "-1px" }}>⭐⭐⭐⭐⭐</span>
             <span
               style={{
                 fontSize: "11px",
                 fontWeight: 700,
-                color: "rgba(255,255,255,0.78)",
-                textShadow: "0 1px 6px rgba(0,0,0,0.9)",
+                color: C.darkWarm,
                 fontFamily: "'Cairo', sans-serif",
               }}
             >
@@ -277,27 +362,27 @@ const HeroSection = () => {
             </span>
           </div>
 
-          {/* Animated result card */}
+          {/* Animated result card — champagne card on gold bg */}
           <div
             style={{
-              background: "rgba(201,151,42,0.13)",
-              border: "1px solid rgba(201,151,42,0.38)",
+              background: "rgba(255,255,255,0.55)",
+              border: `1px solid rgba(184,134,11,0.35)`,
               borderRadius: "12px",
               padding: "9px 12px",
-              backdropFilter: "blur(4px)",
+              backdropFilter: "blur(6px)",
               display: "flex",
               alignItems: "center",
               gap: "9px",
               minHeight: "50px",
             }}
           >
-            <span style={{ fontSize: "16px", color: "#E8C460", flexShrink: 0 }}>✦</span>
+            <span style={{ fontSize: "15px", color: C.gold, flexShrink: 0 }}>✦</span>
             <div style={{ flex: 1 }}>
               <div
                 style={{
                   fontSize: "14px",
                   fontWeight: 800,
-                  color: "#E8C460",
+                  color: C.dark,
                   fontFamily: "'Cairo', sans-serif",
                   lineHeight: 1.2,
                 }}
@@ -307,14 +392,13 @@ const HeroSection = () => {
               <div
                 style={{
                   fontSize: "10px",
-                  color: "rgba(255,255,255,0.60)",
+                  color: C.muted,
                   fontFamily: "'Cairo', sans-serif",
                 }}
               >
                 {RESULTS[activeResult].sub} — من تجارب زبوناتنا
               </div>
             </div>
-            {/* Dot indicators */}
             <div style={{ display: "flex", gap: "4px", flexShrink: 0 }}>
               {RESULTS.map((_, i) => (
                 <div
@@ -323,7 +407,7 @@ const HeroSection = () => {
                     width: "5px",
                     height: "5px",
                     borderRadius: "50%",
-                    background: i === activeResult ? "#E8C460" : "rgba(201,151,42,0.28)",
+                    background: i === activeResult ? C.gold : "rgba(184,134,11,0.25)",
                     transition: "background 0.35s",
                   }}
                 />
@@ -332,17 +416,10 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* ── BOTTOM: trust pills + CTAs ── */}
+        {/* ── BOTTOM BLOCK — Trust + CTAs ── */}
         <div>
-          {/* Trust pills */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "6px",
-              marginBottom: "9px",
-            }}
-          >
+          {/* Trust pills — dark on semi-transparent white */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "9px" }}>
             {[
               { e: "🚚", t: "توصيل مجاني" },
               { e: "💳", t: "الدفع عند الاستلام" },
@@ -352,12 +429,12 @@ const HeroSection = () => {
                 style={{
                   fontSize: "10.5px",
                   fontWeight: 700,
-                  padding: "4px 10px",
+                  padding: "5px 10px",
                   borderRadius: "20px",
-                  background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.17)",
-                  color: "#fff",
-                  backdropFilter: "blur(5px)",
+                  background: "rgba(255,255,255,0.65)",
+                  border: `1px solid rgba(184,134,11,0.40)`,
+                  color: C.darkWarm,
+                  backdropFilter: "blur(4px)",
                   fontFamily: "'Cairo', sans-serif",
                 }}
               >
@@ -366,26 +443,26 @@ const HeroSection = () => {
             ))}
           </div>
 
-          {/* PRIMARY CTA */}
+          {/* PRIMARY CTA — same gold gradient, now pops against champagne */}
           <button
             onClick={scrollToOrder}
             style={{
               width: "100%",
-              padding: "16px 20px",
+              padding: "17px 20px",
               borderRadius: "14px",
               border: "none",
-              background: "linear-gradient(135deg, #F0D060 0%, #C9972A 52%, #9A7218 100%)",
-              color: "#1A1208",
+              background: "linear-gradient(135deg,#1A1208 0%,#2D1E04 100%)",
+              color: C.goldBright,
               fontSize: "16px",
               fontWeight: 900,
               fontFamily: "'Cairo', sans-serif",
               cursor: "pointer",
               marginBottom: "8px",
               boxShadow: ctaPulse
-                ? "0 0 0 6px rgba(201,151,42,0.32), 0 6px 28px rgba(201,151,42,0.72)"
-                : "0 5px 22px rgba(201,151,42,0.50)",
-              transform: ctaPulse ? "scale(1.016)" : "scale(1)",
-              transition: "box-shadow 0.30s, transform 0.30s",
+                ? `0 0 0 7px rgba(184,134,11,0.28),0 6px 28px rgba(26,12,2,0.55)`
+                : `0 5px 22px rgba(26,12,2,0.40)`,
+              transform: ctaPulse ? "scale(1.018)" : "scale(1)",
+              transition: "box-shadow 0.28s, transform 0.28s",
             }}
           >
             🛒 اطلبي الآن — ابتداءً من 199 درهم
@@ -398,14 +475,15 @@ const HeroSection = () => {
               width: "100%",
               padding: "11px 20px",
               borderRadius: "14px",
-              background: "transparent",
-              border: "1.5px solid rgba(201,151,42,0.48)",
-              color: "#E8C460",
+              background: "rgba(255,255,255,0.50)",
+              border: `1.5px solid rgba(184,134,11,0.55)`,
+              color: C.dark,
               fontSize: "12px",
               fontWeight: 700,
               fontFamily: "'Cairo', sans-serif",
               cursor: "pointer",
               marginBottom: "7px",
+              backdropFilter: "blur(4px)",
             }}
           >
             🎁 3 علب = سيروم مجاناً | 4 علب = سيرومان — شوفي العروض
@@ -416,8 +494,9 @@ const HeroSection = () => {
             style={{
               textAlign: "center",
               fontSize: "10px",
-              color: "rgba(255,255,255,0.38)",
+              color: "rgba(255,255,255,0.75)",
               fontFamily: "'Cairo', sans-serif",
+              textShadow: "0 1px 4px rgba(0,0,0,0.5)",
             }}
           >
             🔒 بدون دفع مسبق · الدفع فقط عند استلام الطلب · توصيل 24-48 ساعة
