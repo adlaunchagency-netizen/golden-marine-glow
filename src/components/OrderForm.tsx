@@ -96,13 +96,16 @@ const OrderForm = () => {
 
     setLoading(true);
     try {
+      const selectedOffer = offers.find(o => o.value === form.offer);
       const { error: dbError } = await (supabase as any).from("orders").insert({
         customer_name: form.customer_name.trim(),
         phone: form.phone.trim(),
         city: form.city,
         secteur: form.secteur || null,
-        offer_price: offerPriceMap[form.offer],
-        product: "Neo Collagen",
+        offer_price: selectedOffer?.price || offerPriceMap[form.offer],
+        offer_label: selectedOffer?.label || form.offer,
+        product: "Paravita Neo Collagen",
+        created_at: new Date().toISOString(),
       } as any);
 
       if (dbError) throw dbError;

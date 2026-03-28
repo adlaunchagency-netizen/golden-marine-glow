@@ -121,10 +121,17 @@ const PricingSection = () => (
             <p className="font-body text-xs text-gold-light/50 mb-1 text-center">{tier.subtitle}</p>
             <p className="font-body text-sm text-gold-light/60 mb-4 text-center">{tier.boxes}</p>
 
-            <div className="mb-6 text-center">
+            <div className="mb-2 text-center">
+              {tier.oldPrice && (
+                <span className="font-body text-base text-gold-light/40 line-through mr-2">{tier.oldPrice} درهم</span>
+              )}
               <span className="font-body text-4xl font-extrabold text-gold-light">{tier.price}</span>
               <span className="font-body text-base text-gold-light/60 mr-1">درهم</span>
             </div>
+            {tier.savingsBadge && (
+              <p className="text-center text-xs font-bold text-gold mb-4">{tier.savingsBadge}</p>
+            )}
+            {!tier.savingsBadge && <div className="mb-4" />}
 
             <ul className="space-y-3 mb-8 flex-1">
               {tier.features.map((f) => (
