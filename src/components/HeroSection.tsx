@@ -52,18 +52,17 @@ const HeroSection = () => {
 
       {/* ── LAYER 4: ALL CONTENT ── */}
       <div
-        className="absolute inset-0 flex flex-col justify-between"
+        className="absolute inset-0 flex flex-col justify-between items-center text-center"
         style={{
           zIndex: 20,
-          paddingTop: "68px",
+          paddingTop: "72px",
           paddingBottom: "28px",
-          /* right padding = bottle zone so text never overlaps */
-          paddingRight: "calc(40vw + 10px)",
-          paddingLeft: "20px",
+          paddingLeft: "24px",
+          paddingRight: "24px",
         }}
       >
         {/* ── TOP: Badge + Headlines + Sub + Pills ── */}
-        <div>
+        <div className="flex flex-col items-center">
           {/* Gold badge */}
           <span
             className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4"
@@ -80,9 +79,9 @@ const HeroSection = () => {
           <h1
             className="font-black leading-none mb-2"
             style={{
-              fontSize: "clamp(36px, 11vw, 52px)",
+              fontSize: "clamp(38px, 12vw, 56px)",
               color: "#E8C460",
-              textShadow: "0 2px 20px rgba(0,0,0,0.95)," + "0 0 44px rgba(201,151,42,0.35)",
+              textShadow: "0 2px 20px rgba(0,0,0,0.95), 0 0 44px rgba(201,151,42,0.35)",
               fontFamily: "'Cairo', sans-serif",
             }}
           >
@@ -93,7 +92,7 @@ const HeroSection = () => {
           <h2
             className="font-black leading-tight mb-5"
             style={{
-              fontSize: "clamp(24px, 7.5vw, 38px)",
+              fontSize: "clamp(24px, 8vw, 40px)",
               color: "#FFFFFF",
               textShadow: "0 2px 20px rgba(0,0,0,0.95)",
               fontFamily: "'Cairo', sans-serif",
@@ -109,14 +108,14 @@ const HeroSection = () => {
               color: "rgba(255,255,255,0.85)",
               textShadow: "0 1px 8px rgba(0,0,0,0.95)",
               fontFamily: "'Cairo', sans-serif",
-              maxWidth: "260px",
+              maxWidth: "340px",
             }}
           >
             Neo Collagen من Paravita — ببتيدات الكولاجين البحري الذي يعطيك بشرة صافية، شعر قوي، وأظافر متينة.
           </p>
 
           {/* Stars */}
-          <div className="flex items-center gap-2 mb-5">
+          <div className="flex items-center justify-center gap-2 mb-5">
             <span style={{ color: "#E8C460", fontSize: "14px", letterSpacing: "-1px" }}>⭐⭐⭐⭐⭐</span>
             <span
               style={{
@@ -132,7 +131,7 @@ const HeroSection = () => {
           </div>
 
           {/* Trust pills */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
             {["🚚 توصيل مجاني", "💳 الدفع عند الاستلام", "🌿 100% طبيعي"].map((item) => (
               <span
                 key={item}
