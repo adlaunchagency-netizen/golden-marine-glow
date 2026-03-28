@@ -1,3 +1,6 @@
+import heroBackground from "@/assets/neo-collagen-hero.png";
+import bottleImage from "@/assets/neo-collagen-product.png";
+
 const Hero = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
