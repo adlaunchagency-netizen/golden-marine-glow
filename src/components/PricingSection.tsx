@@ -19,14 +19,14 @@ const tiers = [
   },
   {
     id: 2,
-    name: "العرض الأكثر مبيعاً",
+    name: "الأكثر طلباً",
     subtitle: "Best Value",
     boxes: "3 علب + سيروم هدية",
     price: 299,
     offerValue: "3-boxes-299",
     features: ["كولاجين بحري 10,000mg", "3 أشهر", "سيروم كولاجين مجاناً", "توصيل مجاني"],
     featured: true,
-    badge: "SAVE 62% ⭐",
+    badge: "⭐ توفير 62%",
     image: bundle3,
   },
   {
@@ -38,7 +38,7 @@ const tiers = [
     offerValue: "4-boxes-399",
     features: ["كولاجين بحري 10,000mg", "4 أشهر", "2 سيروم كولاجين مجاناً", "توصيل مجاني", "أفضل قيمة"],
     featured: false,
-    badge: "SAVE 66% 💎",
+    badge: "💎 توفير 66%",
     image: bundle4,
   },
 ];
@@ -72,20 +72,32 @@ const PricingSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15, duration: 0.6 }}
-            className={`relative rounded-2xl p-6 md:p-8 border flex flex-col ${
+            className={`relative rounded-2xl p-6 md:p-8 border flex flex-col overflow-hidden ${
               tier.featured
                 ? "border-gold bg-gold/10 md:scale-[1.03] shadow-[0_0_40px_-10px_hsl(var(--gold)/0.3)]"
                 : "border-gold/20 bg-dark-bg"
             }`}
           >
+            {/* Badge */}
             {tier.badge && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold-gradient text-dark-bg text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap">
-                {tier.badge}
+              <div className="absolute -top-0 left-0 right-0 flex justify-center z-10">
+                <span className="bg-gold-gradient text-dark-bg text-xs font-bold px-5 py-1.5 rounded-b-lg whitespace-nowrap">
+                  {tier.badge}
+                </span>
+              </div>
+            )}
+
+            {/* "Most Popular" ribbon for featured */}
+            {tier.featured && (
+              <div className="absolute top-5 -right-8 z-20 rotate-[-45deg]">
+                <div className="bg-gold-gradient text-dark-bg text-[10px] font-bold px-8 py-1 shadow-lg">
+                  الأكثر طلباً ⭐
+                </div>
               </div>
             )}
 
             {/* Product image */}
-            <div className="flex justify-center mb-5">
+            <div className="flex justify-center mb-5 mt-6">
               <img
                 src={tier.image}
                 alt={tier.name}
@@ -98,14 +110,6 @@ const PricingSection = () => (
                 }}
               />
             </div>
-
-            {tier.featured && (
-              <div className="flex justify-center mb-2">
-                <span className="inline-flex items-center gap-1 text-xs font-bold text-gold bg-gold/15 px-3 py-1 rounded-full">
-                  <Star className="w-3 h-3 fill-gold" /> Most Popular
-                </span>
-              </div>
-            )}
 
             <h3 className="font-body text-lg font-bold text-champagne mb-0.5 text-center">{tier.name}</h3>
             <p className="font-body text-xs text-gold-light/50 mb-1 text-center">{tier.subtitle}</p>

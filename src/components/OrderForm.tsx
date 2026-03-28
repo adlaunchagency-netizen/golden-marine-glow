@@ -14,6 +14,19 @@ const cities = [
   "Autre"
 ];
 
+const citySecteurs: Record<string, string[]> = {
+  Casablanca: ["Maârif", "Aïn Diab", "Gauthier", "Bourgogne", "Sidi Moumen", "Hay Hassani", "Aïn Chock", "Derb Sultan", "Anfa", "Hay Mohammadi", "Sbata", "Ben M'Sick", "Moulay Rachid"],
+  Rabat: ["Agdal", "Hassan", "Hay Riad", "L'Océan", "Souissi", "Yacoub El Mansour", "Akkari", "Takaddoum"],
+  Marrakech: ["Guéliz", "Hivernage", "Médina", "Ménara", "Sidi Youssef Ben Ali", "Targa", "M'Hamid"],
+  Fès: ["Ville Nouvelle", "Médina", "Saïss", "Zouagha", "Jnan El Ward", "Narjiss", "Mont Fleuri"],
+  Tanger: ["Boulevard", "Malabata", "Iberia", "Marshan", "Boukhalef", "Médina", "Val Fleuri"],
+  Agadir: ["Talborjt", "Hay Mohammadi", "Cité Dakhla", "Nouveau Talborjt", "Charaf", "Hay Salam"],
+  Meknès: ["Hamria", "Ville Nouvelle", "Médina", "Sidi Bouzekri", "Marjane"],
+  Salé: ["Tabriquet", "Hay Salam", "Bettana", "Laâyayda", "Sala Al Jadida"],
+  Kénitra: ["Ville Haute", "Ville Basse", "Bir Rami", "Ouled Oujih", "Saknia"],
+  Tétouan: ["Centre Ville", "Médina", "Martil", "Sania Ramel", "M'diq"],
+};
+
 const offers = [
   { label: "1 علبة — 199 درهم", value: "1-box-199" },
   { label: "3 علب + سيروم — 299 درهم", value: "3-boxes-299" },
@@ -31,6 +44,7 @@ const OrderForm = () => {
     customer_name: "",
     phone: "",
     city: "",
+    secteur: "",
     offer: "3-boxes-299",
   });
   const [loading, setLoading] = useState(false);
@@ -40,7 +54,9 @@ const OrderForm = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  // Listen for offer selection from PricingSection
+  const hasSecteurs = form.city && citySecteurs[form.city];
+  const availableSecteurs = hasSecteurs ? citySecteurs[form.city] : [];
+
   useEffect(() => {
     const handler = (e: Event) => {
       const offer = (e as CustomEvent).detail;
@@ -49,6 +65,7 @@ const OrderForm = () => {
     window.addEventListener("select-offer", handler);
     return () => window.removeEventListener("select-offer", handler);
   }, []);
+
   const filteredCities = cities.filter((c) =>
     c.toLowerCase().includes(citySearch.toLowerCase())
   );
@@ -83,9 +100,9 @@ const OrderForm = () => {
         customer_name: form.customer_name.trim(),
         phone: form.phone.trim(),
         city: form.city,
+        secteur: form.secteur || null,
         offer_price: offerPriceMap[form.offer],
         product: "Neo Collagen",
-        created_at: new Date().toISOString(),
       } as any);
 
       if (dbError) throw dbError;
@@ -180,7 +197,6 @@ const OrderForm = () => {
 
             {cityOpen && (
               <div className="absolute z-50 top-full mt-1 w-full bg-dark-bg border border-gold/30 rounded-xl overflow-hidden shadow-lg max-h-60">
-                {/* Search input */}
                 <div className="flex items-center gap-2 px-3 py-2 border-b border-gold/20">
                   <Search className="w-4 h-4 text-gold-light/40 shrink-0" />
                   <input
@@ -192,7 +208,6 @@ const OrderForm = () => {
                     className="w-full bg-transparent text-champagne font-body text-sm placeholder:text-gold-light/30 focus:outline-none"
                   />
                 </div>
-                {/* City list */}
                 <ul className="overflow-y-auto max-h-48">
                   {filteredCities.length === 0 ? (
                     <li className="px-4 py-3 text-sm text-gold-light/40 font-body">لا توجد نتائج</li>
@@ -202,7 +217,7 @@ const OrderForm = () => {
                         <button
                           type="button"
                           onClick={() => {
-                            setForm({ ...form, city: c });
+                            setForm({ ...form, city: c, secteur: "" });
                             setCityOpen(false);
                             setCitySearch("");
                           }}
@@ -221,6 +236,23 @@ const OrderForm = () => {
               </div>
             )}
           </div>
+
+          {/* Secteur - dependent dropdown */}
+          {hasSecteurs && (
+            <div>
+              <label className="block font-body text-sm font-medium text-champagne mb-2">المنطقة / Secteur</label>
+              <select
+                value={form.secteur}
+                onChange={(e) => setForm({ ...form, secteur: e.target.value })}
+                className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body focus:outline-none focus:border-gold transition-colors appearance-none"
+              >
+                <option value="">اختاري المنطقة</option>
+                {availableSecteurs.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+          )}
 
           {/* Offer */}
           <div>
