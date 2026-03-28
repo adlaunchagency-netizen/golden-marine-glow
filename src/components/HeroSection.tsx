@@ -1,20 +1,22 @@
 import { motion } from "framer-motion";
-import { useShopifyProduct } from "@/hooks/useShopifyProduct";
-import heroImage from "@/assets/neo-collagen-hero.png";
+import heroBottle from "@/assets/neo-collagen-hero.png";
+import heroWoman from "@/assets/hero-woman.png";
+
+const floatingAnimation = {
+  y: [0, -3, 0],
+  transition: {
+    duration: 3,
+    repeat: Infinity,
+    ease: "easeInOut" as const,
+  },
+};
 
 const HeroSection = () => {
-  const { data: product, isLoading } = useShopifyProduct("collagen");
-
-  const productImage = heroImage;
-  const price = product?.priceRange?.minVariantPrice?.amount
-    ? Math.round(parseFloat(product.priceRange.minVariantPrice.amount))
-    : 199;
-
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-dark-bg">
       {/* Radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(40_68%_47%/0.08),transparent_70%)]" />
-      
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--gold)/0.08),transparent_70%)]" />
+
       <div className="container grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
         {/* Text */}
         <motion.div
@@ -46,32 +48,49 @@ const HeroSection = () => {
             href="#order"
             className="bg-gold-gradient text-dark-bg font-body text-base font-bold px-10 py-4 rounded-xl hover:opacity-90 transition-opacity inline-flex items-center justify-center w-full sm:w-auto min-h-[56px]"
           >
-            اطلبي الآن — ابتداءً من {price} درهم
+            اطلبي الآن — ابتداءً من 199 درهم
           </a>
         </motion.div>
 
-        {/* Product image from Shopify */}
+        {/* Hero visual: Woman + Floating Bottle */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="flex justify-center order-1 md:order-2 relative"
         >
-          {/* Golden glow behind bottle */}
+          {/* Golden glow */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-48 sm:w-56 md:w-64 lg:w-72 aspect-square rounded-full bg-gold/15 blur-3xl" />
+            <div className="w-56 sm:w-64 md:w-72 lg:w-80 aspect-square rounded-full bg-gold/15 blur-3xl" />
           </div>
-          {isLoading ? (
-            <div className="w-56 sm:w-64 md:w-72 lg:w-80 aspect-square bg-gold/5 rounded-2xl animate-pulse" />
-          ) : (
+
+          {/* Woman image */}
+          <div className="relative z-10 flex items-end justify-center">
             <img
-              src={productImage}
-              alt={product?.title || "Paravita Neo Collagen"}
+              src={heroWoman}
+              alt="بشرة مشرقة مع Neo Collagen"
+              width={768}
+              height={1024}
+              className="w-44 sm:w-52 md:w-60 lg:w-68 object-contain opacity-90"
+              style={{
+                maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+              }}
+            />
+
+            {/* Floating bottle overlaid */}
+            <motion.img
+              src={heroBottle}
+              alt="Paravita Neo Collagen"
               width={800}
               height={1024}
-              className="w-56 sm:w-64 md:w-72 lg:w-80 drop-shadow-[0_10px_40px_rgba(201,151,42,0.4)] object-contain relative z-10"
+              animate={floatingAnimation}
+              className="absolute -left-4 sm:-left-8 bottom-4 w-28 sm:w-32 md:w-36 lg:w-40 object-contain z-20"
+              style={{
+                filter: "drop-shadow(0 0 30px rgba(212, 175, 55, 0.3))",
+              }}
             />
-          )}
+          </div>
         </motion.div>
       </div>
 
