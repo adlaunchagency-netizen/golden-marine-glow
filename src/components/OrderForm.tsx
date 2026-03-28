@@ -134,7 +134,7 @@ const OrderForm = () => {
   }
 
   return (
-    <section id="order" className="py-20 md:py-28 bg-dark-bg">
+    <section id="order-form" className="py-20 md:py-28 bg-dark-bg">
       <div className="container max-w-lg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
