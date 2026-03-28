@@ -19,19 +19,18 @@ const HeroSection = () => {
   const scrollToOrder = () => document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section dir="rtl" className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
-      {/* ── LAYER 0: WOMAN BACKGROUND ── */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          zIndex: 0,
-          backgroundImage: "url('/assets/neo-collagen-hero.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "top center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+    <section
+      dir="rtl"
+      className="relative overflow-hidden"
+      style={{
+        height: "100svh",
+        minHeight: "600px",
+        backgroundImage: `url(${heroBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "top center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
 
       {/* ── LAYER 1: DARK GRADIENT OVERLAY ── */}
       <div
