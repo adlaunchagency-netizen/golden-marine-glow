@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { useShopifyProduct } from "@/hooks/useShopifyProduct";
-import fallbackImage from "@/assets/neo-collagen-product.png";
+import heroImage from "@/assets/neo-collagen-hero.png";
 
 const HeroSection = () => {
   const { data: product, isLoading } = useShopifyProduct("collagen");
 
-  const productImage = product?.images?.edges?.[0]?.node?.url || fallbackImage;
+  const productImage = heroImage;
   const price = product?.priceRange?.minVariantPrice?.amount
     ? Math.round(parseFloat(product.priceRange.minVariantPrice.amount))
     : 199;
