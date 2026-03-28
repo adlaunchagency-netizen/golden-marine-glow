@@ -55,8 +55,12 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="flex justify-center order-1 md:order-2"
+          className="flex justify-center order-1 md:order-2 relative"
         >
+          {/* Golden glow behind bottle */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-48 sm:w-56 md:w-64 lg:w-72 aspect-square rounded-full bg-gold/15 blur-3xl" />
+          </div>
           {isLoading ? (
             <div className="w-56 sm:w-64 md:w-72 lg:w-80 aspect-square bg-gold/5 rounded-2xl animate-pulse" />
           ) : (
@@ -65,7 +69,7 @@ const HeroSection = () => {
               alt={product?.title || "Paravita Neo Collagen"}
               width={800}
               height={1024}
-              className="w-56 sm:w-64 md:w-72 lg:w-80 drop-shadow-[0_20px_60px_rgba(201,151,42,0.3)] object-contain"
+              className="w-56 sm:w-64 md:w-72 lg:w-80 drop-shadow-[0_10px_40px_rgba(201,151,42,0.4)] object-contain relative z-10"
             />
           )}
         </motion.div>
