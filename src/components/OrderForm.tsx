@@ -39,6 +39,16 @@ const OrderForm = () => {
   const cityRef = useRef<HTMLDivElement>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+
+  // Listen for offer selection from PricingSection
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const offer = (e as CustomEvent).detail;
+      if (offer) setForm((prev) => ({ ...prev, offer }));
+    };
+    window.addEventListener("select-offer", handler);
+    return () => window.removeEventListener("select-offer", handler);
+  }, []);
   const filteredCities = cities.filter((c) =>
     c.toLowerCase().includes(citySearch.toLowerCase())
   );
