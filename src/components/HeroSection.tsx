@@ -49,39 +49,6 @@ const HeroSection = () => {
         }}
       />
 
-      {/* ── LAYER 2: GOLD GLOW behind bottle ── */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 right-0 pointer-events-none"
-        style={{
-          zIndex: 2,
-          width: "280px",
-          height: "280px",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle," + "rgba(201,151,42,0.50) 0%," + "rgba(201,151,42,0.16) 48%," + "transparent 72%)",
-          transform: "translate(22%, 22%)",
-        }}
-      />
-
-      {/* ── LAYER 3: BOTTLE — bottom-right, transparent, glowing ── */}
-      <img
-        src={BOTTLE_URL}
-        alt="Paravita Neo Collagen"
-        aria-hidden="true"
-        className="absolute bottom-0 right-0 pointer-events-none select-none"
-        style={{
-          zIndex: 3,
-          width: "40vw",
-          maxWidth: "195px",
-          height: "auto",
-          maxHeight: "58vh",
-          objectFit: "contain",
-          objectPosition: "bottom right",
-          background: "transparent",
-          filter: "drop-shadow(0 0 28px rgba(201,151,42,0.80))" + " drop-shadow(0 12px 20px rgba(0,0,0,0.65))",
-        }}
-      />
 
       {/* ── LAYER 4: ALL CONTENT ── */}
       <div
