@@ -21,7 +21,7 @@ const Hero = () => {
 
       {/* Bottle image — floats over everything, bottom-right */}
       <img
-        src="/bottle.png"
+        src="/src/assets/neo-collagen-product.png"
         alt="Paravita Neo Collagen"
         className="absolute bottom-0 right-0 w-40 object-contain pointer-events-none"
         style={{
