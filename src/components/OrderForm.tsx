@@ -110,8 +110,7 @@ const OrderForm = () => {
 
       if (dbError) throw dbError;
       if (typeof window !== "undefined" && window.fbq) {
-        window.fbq("track", "Lead", {
-          content_name: "Paravita Neo Collagen",
+        window.fbq("track", "Purchase", {
           value: selectedOffer?.price || offerPriceMap[form.offer],
           currency: "MAD",
         });
