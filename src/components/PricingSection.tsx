@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
+import { trackEvent } from "@/lib/meta-pixel";
 import bundle1 from "@/assets/bundle-1.png";
 import bundle3 from "@/assets/bundle-3.png";
 import bundle4 from "@/assets/bundle-4.png";
@@ -50,6 +51,13 @@ const tiers = [
 ];
 
 const handleSelectOffer = (offerValue: string) => {
+  const tier = tiers.find((t) => t.offerValue === offerValue);
+  trackEvent("AddToCart", {
+    content_name: "Paravita Neo Collagen",
+    content_category: "Pricing CTA",
+    value: tier?.price,
+    currency: "MAD",
+  });
   window.dispatchEvent(new CustomEvent("select-offer", { detail: offerValue }));
   document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
 };
