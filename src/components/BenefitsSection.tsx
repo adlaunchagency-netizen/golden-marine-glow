@@ -2,13 +2,13 @@ import AnimatedSection from "./AnimatedSection";
 import benefitSkin from "@/assets/benefit-glowing-skin.jpg";
 import benefitHydration from "@/assets/benefit-hydration.jpg";
 import benefitHairNails from "@/assets/benefit-hair-nails.jpg";
-import benefitNatural from "@/assets/benefit-natural.png";
+import benefitNatural from "@/assets/benefit-natural-clean.png";
 
 const benefits = [
-  { img: benefitSkin, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك." },
-  { img: benefitHydration, title: "ترطيب عميق", desc: "ببتيدات بحرية عالية الامتصاص تغذي البشرة من الداخل." },
-  { img: benefitHairNails, title: "شعر وأظافر أقوى", desc: "يقوي بصيلات الشعر والأظافر ويحميها من التكسر." },
-  { img: benefitNatural, title: "طبيعي 100%", desc: "مستخلص من أسماك برية، بدون مواد كيميائية أو حافظات." },
+  { img: benefitSkin, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك.", isProduct: false },
+  { img: benefitHydration, title: "ترطيب عميق", desc: "ببتيدات بحرية عالية الامتصاص تغذي البشرة من الداخل.", isProduct: false },
+  { img: benefitHairNails, title: "شعر وأظافر أقوى", desc: "يقوي بصيلات الشعر والأظافر ويحميها من التكسر.", isProduct: false },
+  { img: benefitNatural, title: "طبيعي 100%", desc: "مستخلص من أسماك برية، بدون مواد كيميائية أو حافظات.", isProduct: true },
 ];
 
 const BenefitsSection = () => (
