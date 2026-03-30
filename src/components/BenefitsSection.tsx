@@ -2,13 +2,13 @@ import AnimatedSection from "./AnimatedSection";
 import benefitSkin from "@/assets/benefit-glowing-skin.jpg";
 import benefitHydration from "@/assets/benefit-hydration.jpg";
 import benefitHairNails from "@/assets/benefit-hair-nails.jpg";
-import benefitNatural from "@/assets/benefit-natural.png";
+import benefitNatural from "@/assets/benefit-natural-clean.png";
 
 const benefits = [
-  { img: benefitSkin, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك." },
-  { img: benefitHydration, title: "ترطيب عميق", desc: "ببتيدات بحرية عالية الامتصاص تغذي البشرة من الداخل." },
-  { img: benefitHairNails, title: "شعر وأظافر أقوى", desc: "يقوي بصيلات الشعر والأظافر ويحميها من التكسر." },
-  { img: benefitNatural, title: "طبيعي 100%", desc: "مستخلص من أسماك برية، بدون مواد كيميائية أو حافظات." },
+  { img: benefitSkin, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك.", isProduct: false },
+  { img: benefitHydration, title: "ترطيب عميق", desc: "ببتيدات بحرية عالية الامتصاص تغذي البشرة من الداخل.", isProduct: false },
+  { img: benefitHairNails, title: "شعر وأظافر أقوى", desc: "يقوي بصيلات الشعر والأظافر ويحميها من التكسر.", isProduct: false },
+  { img: benefitNatural, title: "طبيعي 100%", desc: "مستخلص من أسماك برية، بدون مواد كيميائية أو حافظات.", isProduct: true },
 ];
 
 const BenefitsSection = () => (
@@ -25,8 +25,8 @@ const BenefitsSection = () => (
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {benefits.map((b, i) => (
           <AnimatedSection key={b.title} delay={i * 0.1} className="text-center group bg-background p-6 rounded-xl border border-border hover:border-gold/40 transition-colors">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden transition-colors" style={{ border: "1px solid rgba(201,151,42,0.5)" }}>
-              <img src={b.img} alt={b.title} width={80} height={80} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+            <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden flex items-center justify-center transition-colors" style={{ border: "1px solid rgba(201,151,42,0.5)", background: b.isProduct ? "linear-gradient(135deg, #FDF6E3 0%, #f5eed8 100%)" : undefined }}>
+              <img src={b.img} alt={b.title} width={80} height={80} loading="lazy" decoding="async" className={b.isProduct ? "h-[90%] w-auto object-contain" : "w-full h-full object-cover"} />
             </div>
             <h3 className="font-body text-lg font-bold text-foreground mb-2">{b.title}</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
