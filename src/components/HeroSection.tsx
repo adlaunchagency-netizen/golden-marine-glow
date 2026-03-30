@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import heroModel from "@/assets/hero-model.png";
+import heroModel from "@/assets/hero-model.webp";
 
 const HeroSection = () => {
   const [ctaPulse, setCtaPulse] = useState(false);
@@ -21,6 +21,8 @@ const HeroSection = () => {
       <img
         src={heroModel}
         alt="Paravita Neo Collagen"
+        width={800}
+        height={1434}
         fetchPriority="high"
         loading="eager"
         decoding="sync"
