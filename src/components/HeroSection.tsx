@@ -52,9 +52,18 @@ const HeroSection = () => {
         {/* TOP: Headline area — positioned to avoid covering the model's face */}
         <div className="flex flex-col items-center pt-2">
           {/* Stars + trust */}
-          <div className="flex items-center justify-center gap-2 mb-3">
+          <div
+            className="flex items-center justify-center gap-2 mb-6"
+            style={{
+              background: "rgba(0,0,0,0.4)",
+              backdropFilter: "blur(4px)",
+              padding: "6px 14px",
+              borderRadius: "24px",
+              border: "1px solid rgba(201,151,42,0.2)",
+            }}
+          >
             <span style={{ color: "#E8C460", fontSize: "14px", letterSpacing: "-1px" }}>⭐⭐⭐⭐⭐</span>
-            <span className="text-[11px] font-bold font-body" style={{ color: "rgba(255,255,255,0.80)" }}>
+            <span className="text-[11px] font-bold font-body" style={{ color: "rgba(255,255,255,0.85)" }}>
               أكثر من 10,000 زبونة راضية في المغرب
             </span>
           </div>
