@@ -2,7 +2,7 @@ import AnimatedSection from "./AnimatedSection";
 import benefitSkin from "@/assets/benefit-glowing-skin.jpg";
 import benefitHydration from "@/assets/benefit-hydration.jpg";
 import benefitHairNails from "@/assets/benefit-hair-nails.jpg";
-import benefitNatural from "@/assets/benefit-natural.jpg";
+import benefitNatural from "@/assets/neo-collagen-product.png";
 
 const benefits = [
   { img: benefitSkin, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك." },
