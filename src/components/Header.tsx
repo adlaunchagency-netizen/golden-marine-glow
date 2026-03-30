@@ -64,7 +64,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="#order"
+                href="#pricing"
                 onClick={() => setOpen(false)}
                 className="bg-gold-gradient text-dark-bg font-body text-base font-bold px-8 py-3 rounded-lg"
               >
