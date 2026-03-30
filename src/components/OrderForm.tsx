@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/lib/meta-pixel";
 
 const cities = [
   "Casablanca", "Rabat", "Marrakech", "Fès", "Tanger", "Agadir",
