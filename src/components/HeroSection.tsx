@@ -12,8 +12,12 @@ const HeroSection = () => {
     return () => clearInterval(t);
   }, []);
 
-  const scrollToOrder = () =>
+  const scrollToOrder = () => {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "AddToCart", { content_name: "Paravita Neo Collagen", content_category: "Hero CTA" });
+    }
     document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section dir="rtl" className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>

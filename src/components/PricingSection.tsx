@@ -50,6 +50,14 @@ const tiers = [
 ];
 
 const handleSelectOffer = (offerValue: string) => {
+  const tier = tiers.find((t) => t.offerValue === offerValue);
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "AddToCart", {
+      content_name: "Paravita Neo Collagen",
+      value: tier?.price,
+      currency: "MAD",
+    });
+  }
   window.dispatchEvent(new CustomEvent("select-offer", { detail: offerValue }));
   document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
 };
