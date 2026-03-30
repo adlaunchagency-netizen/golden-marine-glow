@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { trackEvent } from "@/lib/meta-pixel";
 
 const cities = [
   "Casablanca", "Rabat", "Marrakech", "Fès", "Tanger", "Agadir",
@@ -110,11 +109,6 @@ const OrderForm = () => {
       } as any);
 
       if (dbError) throw dbError;
-      trackEvent("Lead", {
-        content_name: "Paravita Neo Collagen",
-        value: selectedOffer?.price || offerPriceMap[form.offer],
-        currency: "MAD",
-      });
       setSuccess(true);
     } catch (err: any) {
       setError("حدث خطأ، المرجو المحاولة مرة أخرى");
