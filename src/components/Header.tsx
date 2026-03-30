@@ -68,13 +68,18 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <a
-                href="#pricing"
-                onClick={() => setOpen(false)}
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  if (typeof window !== "undefined" && window.fbq) {
+                    window.fbq("track", "AddToCart");
+                  }
+                  document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                }}
                 className="bg-gold-gradient text-dark-bg font-body text-base font-bold px-8 py-3 rounded-lg"
               >
                 اطلبي الآن
-              </a>
+              </button>
             </nav>
           </motion.div>
         )}
