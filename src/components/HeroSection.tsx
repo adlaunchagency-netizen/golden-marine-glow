@@ -110,10 +110,26 @@ const HeroSection = () => {
             🛒 اطلبي الآن - الدفع عند الاستلام
           </button>
 
-          {/* Micro-copy */}
-          <p className="text-center font-body" style={{ fontSize: "10px", color: "rgba(255,255,255,0.45)" }}>
-            🔒 بدون دفع مسبق · توصيل 24-48 ساعة · توصيل مجاني
-          </p>
+          {/* Badges */}
+          <div className="flex items-center justify-center gap-2 flex-wrap mt-1">
+            {["🔒 بدون دفع مسبق", "🚚 توصيل 24-48 ساعة", "✨ توصيل مجاني"].map((badge) => (
+              <span
+                key={badge}
+                className="font-body"
+                style={{
+                  fontSize: "10px",
+                  color: "rgba(255,255,255,0.85)",
+                  background: "rgba(0,0,0,0.45)",
+                  backdropFilter: "blur(4px)",
+                  padding: "4px 10px",
+                  borderRadius: "20px",
+                  border: "1px solid rgba(201,151,42,0.25)",
+                }}
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
