@@ -1,22 +1,28 @@
+import { lazy, Suspense } from "react";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import BenefitsSection from "@/components/BenefitsSection";
-import PricingSection from "@/components/PricingSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import OrderForm from "@/components/OrderForm";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
+const BenefitsSection = lazy(() => import("@/components/BenefitsSection"));
+const PricingSection = lazy(() => import("@/components/PricingSection"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const OrderForm = lazy(() => import("@/components/OrderForm"));
+const Footer = lazy(() => import("@/components/Footer"));
+const WhatsAppButton = lazy(() => import("@/components/WhatsAppButton"));
 
 const Index = () => (
   <div className="min-h-screen">
+    <AnnouncementBar />
     <Header />
     <HeroSection />
-    <BenefitsSection />
-    <PricingSection />
-    <TestimonialsSection />
-    <OrderForm />
-    <Footer />
-    <WhatsAppButton />
+    <Suspense fallback={null}>
+      <BenefitsSection />
+      <PricingSection />
+      <TestimonialsSection />
+      <OrderForm />
+      <Footer />
+      <WhatsAppButton />
+    </Suspense>
   </div>
 );
 
