@@ -110,6 +110,11 @@ const OrderForm = () => {
       } as any);
 
       if (dbError) throw dbError;
+      trackEvent("Lead", {
+        content_name: "Paravita Neo Collagen",
+        value: selectedOffer?.price || offerPriceMap[form.offer],
+        currency: "MAD",
+      });
       setSuccess(true);
     } catch (err: any) {
       setError("حدث خطأ، المرجو المحاولة مرة أخرى");

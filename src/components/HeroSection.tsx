@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import heroModel from "@/assets/hero-model.webp";
+import { trackEvent } from "@/lib/meta-pixel";
 
 const HeroSection = () => {
   const [ctaPulse, setCtaPulse] = useState(false);
@@ -12,8 +13,10 @@ const HeroSection = () => {
     return () => clearInterval(t);
   }, []);
 
-  const scrollToOrder = () =>
+  const scrollToOrder = () => {
+    trackEvent("AddToCart", { content_name: "Paravita Neo Collagen", content_category: "Hero CTA" });
     document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section dir="rtl" className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
