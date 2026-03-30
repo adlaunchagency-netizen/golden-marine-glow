@@ -51,7 +51,7 @@ const tiers = [
 
 const handleSelectOffer = (offerValue: string) => {
   window.dispatchEvent(new CustomEvent("select-offer", { detail: offerValue }));
-  document.getElementById("order")?.scrollIntoView({ behavior: "smooth" });
+  document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
 };
 
 const PricingSection = () => (
