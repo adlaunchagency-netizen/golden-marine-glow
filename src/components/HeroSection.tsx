@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import heroModel from "@/assets/hero-model.png";
+import heroModel from "@/assets/hero-model.webp";
 
 const HeroSection = () => {
   const [ctaPulse, setCtaPulse] = useState(false);
