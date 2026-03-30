@@ -108,6 +108,7 @@ const PricingSection = () => (
                 src={tier.image}
                 alt={tier.name}
                 loading="lazy"
+                decoding="async"
                 width={300}
                 height={300}
                 className="w-40 h-40 object-contain rounded-xl"

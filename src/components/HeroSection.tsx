@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import heroBg from "@/assets/neo-collagen-hero.png";
-
-const BOTTLE_URL =
-  "https://cdn.shopify.com/s/files/1/1002/0913/1888/files/f19f9ef9-f69f-4ed4-aa69-aba7cec4fec8.webp?v=1773633264";
+import heroModel from "@/assets/hero-model.png";
 
 const HeroSection = () => {
   const [ctaPulse, setCtaPulse] = useState(false);
 
-  /* CTA heartbeat every 4s to re-attract attention */
   useEffect(() => {
     const t = setInterval(() => {
       setCtaPulse(true);
@@ -16,23 +12,22 @@ const HeroSection = () => {
     return () => clearInterval(t);
   }, []);
 
-  const scrollToOrder = () => document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
+  const scrollToOrder = () =>
+    document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section
-      dir="rtl"
-      className="relative overflow-hidden"
-      style={{
-        height: "100svh",
-        minHeight: "600px",
-        backgroundImage: `url(${heroBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "top center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <section dir="rtl" className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
+      {/* Hero background image — eager loaded for LCP */}
+      <img
+        src={heroModel}
+        alt="Paravita Neo Collagen"
+        fetchPriority="high"
+        loading="eager"
+        decoding="sync"
+        className="absolute inset-0 w-full h-full object-cover object-top"
+      />
 
-      {/* ── LAYER 1: DARK GRADIENT OVERLAY ── */}
+      {/* Dark gradient overlay */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -40,171 +35,84 @@ const HeroSection = () => {
           zIndex: 1,
           background: [
             "linear-gradient(to bottom,",
-            "rgba(4,1,0,0.88) 0%,",
-            "rgba(4,1,0,0.52) 25%,",
-            "rgba(4,1,0,0.30) 50%,",
-            "rgba(4,1,0,0.75) 75%,",
-            "rgba(4,1,0,0.97) 100%)",
+            "rgba(4,1,0,0.70) 0%,",
+            "rgba(4,1,0,0.25) 30%,",
+            "rgba(4,1,0,0.15) 50%,",
+            "rgba(4,1,0,0.60) 75%,",
+            "rgba(4,1,0,0.95) 100%)",
           ].join(" "),
         }}
       />
 
-
-      {/* ── LAYER 4: ALL CONTENT ── */}
+      {/* Content */}
       <div
         className="absolute inset-0 flex flex-col justify-between items-center text-center"
-        style={{
-          zIndex: 20,
-          paddingTop: "72px",
-          paddingBottom: "28px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
-        }}
+        style={{ zIndex: 20, paddingTop: "56px", paddingBottom: "28px", paddingLeft: "20px", paddingRight: "20px" }}
       >
-        {/* ── TOP: Badge + Headlines + Sub + Pills ── */}
-        <div className="flex flex-col items-center">
-          {/* Gold badge */}
-          <span
-            className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4"
-            style={{
-              background: "#C9972A",
-              color: "#1A1208",
-              fontFamily: "'Cairo', sans-serif",
-            }}
-          >
-            كولاجين بحري طبيعي 100%
-          </span>
-
-          {/* H1 */}
-          <h1
-            className="font-black leading-none mb-2"
-            style={{
-              fontSize: "clamp(38px, 12vw, 56px)",
-              color: "#E8C460",
-              textShadow: "0 2px 20px rgba(0,0,0,0.95), 0 0 44px rgba(201,151,42,0.35)",
-              fontFamily: "'Cairo', sans-serif",
-            }}
-          >
-            بشرة مشرقة
-          </h1>
-
-          {/* H2 */}
-          <h2
-            className="font-black leading-tight mb-5"
-            style={{
-              fontSize: "clamp(24px, 8vw, 40px)",
-              color: "#FFFFFF",
-              textShadow: "0 2px 20px rgba(0,0,0,0.95)",
-              fontFamily: "'Cairo', sans-serif",
-            }}
-          >
-            من أعماق البحر
-          </h2>
-
-          {/* Subtext */}
-          <p
-            className="text-sm leading-relaxed mb-5"
-            style={{
-              color: "#E8C460",
-              textShadow: "0 1px 8px rgba(0,0,0,0.95)",
-              fontFamily: "'Cairo', sans-serif",
-              maxWidth: "340px",
-            }}
-          >
-            Neo Collagen من Paravita — ببتيدات الكولاجين البحري الذي يعطيك بشرة صافية، شعر قوي، وأظافر متينة.
-          </p>
-
-          {/* Stars */}
-          <div className="flex items-center justify-center gap-2 mb-5">
+        {/* TOP: Headline area — positioned to avoid covering the model's face */}
+        <div className="flex flex-col items-center pt-2">
+          {/* Stars + trust */}
+          <div className="flex items-center justify-center gap-2 mb-3">
             <span style={{ color: "#E8C460", fontSize: "14px", letterSpacing: "-1px" }}>⭐⭐⭐⭐⭐</span>
-            <span
-              style={{
-                fontSize: "11px",
-                fontWeight: 700,
-                color: "rgba(255,255,255,0.75)",
-                textShadow: "0 1px 6px rgba(0,0,0,0.9)",
-                fontFamily: "'Cairo', sans-serif",
-              }}
-            >
-              +10,000 سيدة مغربية
+            <span className="text-[11px] font-bold font-body" style={{ color: "rgba(255,255,255,0.80)" }}>
+              أكثر من 10,000 زبونة راضية في المغرب
             </span>
           </div>
 
-          {/* Trust pills */}
-          <div className="flex flex-wrap justify-center gap-2">
-            {["🚚 توصيل مجاني", "💳 الدفع عند الاستلام", "🌿 100% طبيعي"].map((item) => (
-              <span
-                key={item}
-                className="text-xs font-semibold px-3 py-1.5 rounded-full"
-                style={{
-                  color: "#fff",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.22)",
-                  backdropFilter: "blur(5px)",
-                  textShadow: "0 1px 4px rgba(0,0,0,0.8)",
-                  fontFamily: "'Cairo', sans-serif",
-                }}
-              >
-                {item}
-              </span>
-            ))}
-          </div>
+          {/* Headline — premium serif */}
+          <h1
+            className="font-display font-semibold leading-tight mb-3"
+            style={{
+              fontSize: "clamp(26px, 7.5vw, 42px)",
+              color: "#E8C460",
+              textShadow: "0 2px 24px rgba(0,0,0,0.95), 0 0 50px rgba(201,151,42,0.30)",
+              maxWidth: "420px",
+            }}
+          >
+            بشرة مشرقة ومشدودة من أعماق البحر
+          </h1>
         </div>
 
-        {/* ── BOTTOM: CTA ── */}
-        <div>
-          {/* PRIMARY CTA — working onClick */}
+        {/* BOTTOM: Sub-headline + CTA */}
+        <div className="flex flex-col items-center w-full" style={{ maxWidth: "420px" }}>
+          {/* Sub-headline */}
+          <p
+            className="text-sm leading-relaxed mb-5 font-body"
+            style={{
+              color: "rgba(255,255,255,0.90)",
+              textShadow: "0 1px 10px rgba(0,0,0,0.95)",
+              maxWidth: "360px",
+            }}
+          >
+            استعيدي شباب بشرتك طبيعيًا مع كولاجين البحر النقي. نتائج ملحوظة في 14 يومًا.
+          </p>
+
+          {/* Primary CTA — pulsating gold */}
           <button
             onClick={scrollToOrder}
-            className="w-full rounded-2xl font-black active:scale-95"
+            className="w-full rounded-2xl font-black active:scale-95 font-body"
             style={{
               padding: "18px 20px",
               fontSize: "17px",
-              fontFamily: "'Cairo', sans-serif",
               background: "linear-gradient(135deg, #E8C460 0%, #C9972A 52%, #A07820 100%)",
               color: "#1A1208",
               border: "none",
               cursor: "pointer",
               marginBottom: "10px",
+              minHeight: "56px",
               boxShadow: ctaPulse
-                ? "0 0 0 7px rgba(201,151,42,0.28), 0 6px 28px rgba(201,151,42,0.70)"
+                ? "0 0 0 8px rgba(201,151,42,0.30), 0 6px 30px rgba(201,151,42,0.70)"
                 : "0 5px 22px rgba(201,151,42,0.52)",
-              transform: ctaPulse ? "scale(1.018)" : "scale(1)",
-              transition: "box-shadow 0.28s, transform 0.28s",
+              transform: ctaPulse ? "scale(1.02)" : "scale(1)",
+              transition: "box-shadow 0.3s, transform 0.3s",
             }}
           >
-            🛒 اطلبي الآن — ابتداءً من 199 درهم
-          </button>
-
-          {/* SECONDARY CTA — working onClick */}
-          <button
-            onClick={scrollToOrder}
-            className="w-full rounded-2xl font-bold active:scale-95"
-            style={{
-              padding: "13px 20px",
-              fontSize: "13px",
-              fontFamily: "'Cairo', sans-serif",
-              background: "transparent",
-              border: "1.5px solid rgba(201,151,42,0.50)",
-              color: "#E8C460",
-              cursor: "pointer",
-              marginBottom: "8px",
-              transition: "opacity 0.2s",
-            }}
-          >
-            🎁 3 علب = سيروم مجاناً | 4 علب = سيرومان — شوفي العروض
+            🛒 اطلبي الآن - الدفع عند الاستلام
           </button>
 
           {/* Micro-copy */}
-          <p
-            className="text-center"
-            style={{
-              fontSize: "10px",
-              color: "rgba(255,255,255,0.40)",
-              fontFamily: "'Cairo', sans-serif",
-            }}
-          >
-            🔒 بدون دفع مسبق · الدفع فقط عند استلام الطلب · توصيل 24-48 ساعة
+          <p className="text-center font-body" style={{ fontSize: "10px", color: "rgba(255,255,255,0.45)" }}>
+            🔒 بدون دفع مسبق · توصيل 24-48 ساعة · توصيل مجاني
           </p>
         </div>
       </div>
