@@ -27,12 +27,17 @@ const Header = () => {
               {link.label}
             </a>
           ))}
-          <a
-            href="#order"
+          <button
+            onClick={() => {
+              if (typeof window !== "undefined" && window.fbq) {
+                window.fbq("track", "AddToCart");
+              }
+              document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth", block: "center" });
+            }}
             className="bg-gold-gradient text-dark-bg font-body text-sm font-bold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
           >
             اطلبي الآن
-          </a>
+          </button>
         </nav>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-gold-light" aria-label="Menu">
@@ -63,13 +68,18 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <a
-                href="#pricing"
-                onClick={() => setOpen(false)}
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  if (typeof window !== "undefined" && window.fbq) {
+                    window.fbq("track", "AddToCart");
+                  }
+                  document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                }}
                 className="bg-gold-gradient text-dark-bg font-body text-base font-bold px-8 py-3 rounded-lg"
               >
                 اطلبي الآن
-              </a>
+              </button>
             </nav>
           </motion.div>
         )}
