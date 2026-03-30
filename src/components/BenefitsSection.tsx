@@ -1,11 +1,14 @@
-import { Sparkles, Droplets, Shield, Leaf } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import benefitSkin from "@/assets/benefit-glowing-skin.jpg";
+import benefitHydration from "@/assets/benefit-hydration.jpg";
+import benefitHairNails from "@/assets/benefit-hair-nails.jpg";
+import benefitNatural from "@/assets/benefit-natural.jpg";
 
 const benefits = [
-  { icon: Sparkles, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك." },
-  { icon: Droplets, title: "ترطيب عميق", desc: "ببتيدات بحرية عالية الامتصاص تغذي البشرة من الداخل." },
-  { icon: Shield, title: "شعر وأظافر أقوى", desc: "يقوي بصيلات الشعر والأظافر ويحميها من التكسر." },
-  { icon: Leaf, title: "طبيعي 100%", desc: "مستخلص من أسماك برية، بدون مواد كيميائية أو حافظات." },
+  { img: benefitSkin, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك." },
+  { img: benefitHydration, title: "ترطيب عميق", desc: "ببتيدات بحرية عالية الامتصاص تغذي البشرة من الداخل." },
+  { img: benefitHairNails, title: "شعر وأظافر أقوى", desc: "يقوي بصيلات الشعر والأظافر ويحميها من التكسر." },
+  { img: benefitNatural, title: "طبيعي 100%", desc: "مستخلص من أسماك برية، بدون مواد كيميائية أو حافظات." },
 ];
 
 const BenefitsSection = () => (
@@ -22,8 +25,8 @@ const BenefitsSection = () => (
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {benefits.map((b, i) => (
           <AnimatedSection key={b.title} delay={i * 0.1} className="text-center group bg-background p-6 rounded-xl border border-border hover:border-gold/40 transition-colors">
-            <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-              <b.icon className="w-6 h-6 text-gold" />
+            <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-2 border-gold/30 group-hover:border-gold/60 transition-colors">
+              <img src={b.img} alt={b.title} width={80} height={80} loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </div>
             <h3 className="font-body text-lg font-bold text-foreground mb-2">{b.title}</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
