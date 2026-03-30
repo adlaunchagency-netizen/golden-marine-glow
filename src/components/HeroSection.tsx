@@ -21,6 +21,8 @@ const HeroSection = () => {
       <img
         src={heroModel}
         alt="Paravita Neo Collagen"
+        width={800}
+        height={1434}
         fetchPriority="high"
         loading="eager"
         decoding="sync"
