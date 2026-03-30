@@ -25,8 +25,8 @@ const BenefitsSection = () => (
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {benefits.map((b, i) => (
           <AnimatedSection key={b.title} delay={i * 0.1} className="text-center group bg-background p-6 rounded-xl border border-border hover:border-gold/40 transition-colors">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden transition-colors" style={{ border: "1px solid rgba(201,151,42,0.5)" }}>
-              <img src={b.img} alt={b.title} width={80} height={80} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+            <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden flex items-center justify-center transition-colors" style={{ border: "1px solid rgba(201,151,42,0.5)", background: b.isProduct ? "linear-gradient(135deg, #FDF6E3 0%, #f5eed8 100%)" : undefined }}>
+              <img src={b.img} alt={b.title} width={80} height={80} loading="lazy" decoding="async" className={b.isProduct ? "h-[90%] w-auto object-contain" : "w-full h-full object-cover"} />
             </div>
             <h3 className="font-body text-lg font-bold text-foreground mb-2">{b.title}</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
