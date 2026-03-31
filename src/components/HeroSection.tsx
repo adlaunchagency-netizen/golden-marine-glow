@@ -16,7 +16,7 @@ const HeroSection = () => {
     if (typeof window !== "undefined" && window.fbq) {
       window.fbq("track", "AddToCart", { content_name: "Paravita Neo Collagen", content_category: "Hero CTA" });
     }
-    document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
