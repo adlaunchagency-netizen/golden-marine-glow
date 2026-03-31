@@ -14,7 +14,7 @@ const tiers = [
     oldPrice: null,
     savingsBadge: null,
     offerValue: "1-box-199",
-    features: ["شهر كامل من العلاج", "توصيل مجاني", "الدفع عند الاستلام"],
+    features: ["شهر كامل من العناية", "توصيل مجاني", "الدفع عند الاستلام"],
     featured: false,
     badge: null,
     image: bundle1,
