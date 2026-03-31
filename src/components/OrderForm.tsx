@@ -28,9 +28,9 @@ const citySecteurs: Record<string, string[]> = {
 };
 
 const offers = [
-  { label: "عبوة واحدة — بدون هدية", value: "1-box-199", price: 199, description: "شهر كامل من العلاج" },
-  { label: "⭐ 3 علب + سيروم هدية مجانية", value: "3-boxes-299", price: 299, description: "ننصح به — سيروم كولاجين 30ml مجاناً مع طلبك", recommended: true },
-  { label: "☆ 4 علب + 2 سيروم هدية", value: "4-boxes-399", price: 399, description: "الأفضل قيمة — سيرومان كولاجين 30ml مجاناً مع طلبك" },
+  { label: "عبوة واحدة — 199 درهم", value: "1-box-199", price: 199 },
+  { label: "3 علب + سيروم — 299 درهم ⭐ الأكثر مبيعاً", value: "3-boxes-299", price: 299, recommended: true },
+  { label: "4 علب + 2 سيروم — 399 درهم 💎 الأفضل قيمة", value: "4-boxes-399", price: 399 },
 ];
 
 const offerPriceMap: Record<string, number> = {
