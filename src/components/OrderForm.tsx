@@ -272,7 +272,7 @@ const OrderForm = () => {
               className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body focus:outline-none focus:border-gold transition-colors appearance-none"
             >
               {offers.map((o) => (
-                <option key={o.value} value={o.value}>{o.label} — {o.price} درهم</option>
+                <option key={o.value} value={o.value}>{o.label}</option>
               ))}
             </select>
           </div>
