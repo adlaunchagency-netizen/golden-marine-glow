@@ -33,6 +33,10 @@ const BenefitsSection = () => (
           </AnimatedSection>
         ))}
       </div>
+
+      <p className="font-body text-xs text-muted-foreground text-center mt-8">
+        * هذه المعلومات لأغراض تثقيفية فقط. النتائج تتفاوت من شخص لآخر.
+      </p>
     </div>
   </section>
 );
