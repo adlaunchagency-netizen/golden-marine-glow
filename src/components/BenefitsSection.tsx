@@ -17,7 +17,7 @@ const BenefitsSection = () => (
       <AnimatedSection className="text-center mb-14">
         <p className="font-body text-sm tracking-wider text-gold-dark font-medium mb-3">علاش Neo Collagen؟</p>
         <h2 className="font-body text-3xl md:text-4xl font-bold text-foreground mb-4">
-          فوائد <span className="text-gold-gradient">مثبتة علمياً</span>
+          فوائد <span className="text-gold-gradient">Paravita Neo</span>
         </h2>
         <div className="divider-gold mt-6" />
       </AnimatedSection>
@@ -33,6 +33,10 @@ const BenefitsSection = () => (
           </AnimatedSection>
         ))}
       </div>
+
+      <p className="font-body text-xs text-muted-foreground text-center mt-8">
+        * هذه المعلومات لأغراض تثقيفية فقط. النتائج تتفاوت من شخص لآخر.
+      </p>
     </div>
   </section>
 );
