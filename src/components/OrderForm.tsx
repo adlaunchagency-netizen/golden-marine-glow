@@ -227,25 +227,54 @@ const OrderForm = () => {
                   {filteredCities.length === 0 ? (
                     <li className="px-4 py-3 text-sm text-gold-light/40 font-body">لا توجد نتائج</li>
                   ) : (
-                    filteredCities.map((c) => (
-                      <li key={c}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setForm({ ...form, city: c, secteur: "" });
-                            setCityOpen(false);
-                            setCitySearch("");
-                          }}
-                          className={`w-full text-right px-4 py-3 text-sm font-body transition-colors ${
-                            form.city === c
-                              ? "bg-gold/20 text-gold-light"
-                              : "text-champagne/80 hover:bg-gold/10"
-                          }`}
-                        >
-                          {c}
-                        </button>
-                      </li>
-                    ))
+                    <>
+                      {/* Pinned cities */}
+                      {filteredCities.filter((c) => pinnedCities.includes(c)).map((c) => (
+                        <li key={c}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setForm({ ...form, city: c, secteur: "" });
+                              setCityOpen(false);
+                              setCitySearch("");
+                            }}
+                            className={`w-full text-right px-4 min-h-[44px] flex items-center text-sm font-body font-medium transition-colors ${
+                              form.city === c
+                                ? "bg-gold/20 text-gold-light"
+                                : "text-champagne hover:bg-gold/10"
+                            }`}
+                          >
+                            {c}
+                          </button>
+                        </li>
+                      ))}
+                      {/* Separator */}
+                      {!citySearch && filteredCities.some((c) => !pinnedCities.includes(c)) && (
+                        <li className="px-4 py-2 text-xs text-gold-light/40 font-body border-t border-b border-gold/10 bg-gold/5 text-center select-none">
+                          --- المزيد (بحث) ---
+                        </li>
+                      )}
+                      {/* Other cities */}
+                      {filteredCities.filter((c) => !pinnedCities.includes(c)).map((c) => (
+                        <li key={c}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setForm({ ...form, city: c, secteur: "" });
+                              setCityOpen(false);
+                              setCitySearch("");
+                            }}
+                            className={`w-full text-right px-4 min-h-[44px] flex items-center text-sm font-body transition-colors ${
+                              form.city === c
+                                ? "bg-gold/20 text-gold-light"
+                                : "text-champagne/80 hover:bg-gold/10"
+                            }`}
+                          >
+                            {c}
+                          </button>
+                        </li>
+                      ))}
+                    </>
                   )}
                 </ul>
               </div>

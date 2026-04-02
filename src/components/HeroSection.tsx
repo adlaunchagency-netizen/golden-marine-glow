@@ -55,7 +55,7 @@ const HeroSection = () => {
         className="absolute inset-0 flex flex-col justify-between items-center text-center"
         style={{ zIndex: 20, paddingTop: "56px", paddingBottom: "28px", paddingLeft: "20px", paddingRight: "20px" }}
       >
-        {/* TOP: Headline area — positioned to avoid covering the model's face */}
+        {/* TOP: Headline area */}
         <div className="flex flex-col items-center pt-2">
           {/* Stars + trust */}
           <div
@@ -74,7 +74,7 @@ const HeroSection = () => {
             </span>
           </div>
 
-          {/* Headline — premium serif */}
+          {/* Headline — updated for conversion */}
           <h1
             className="font-display font-semibold leading-tight mb-3"
             style={{
@@ -84,7 +84,7 @@ const HeroSection = () => {
               maxWidth: "420px",
             }}
           >
-            بشرة مشرقة ومشدودة من أعماق البحر
+            اكتشفي السر لي 10,000 مغربية استخدموه — نتائج مرئية في 30 يوم
           </h1>
         </div>
 
@@ -125,24 +125,22 @@ const HeroSection = () => {
             🛒 اطلبي الآن - الدفع عند الاستلام
           </button>
 
-          {/* Badges */}
-          <div className="flex items-center justify-center gap-2 flex-wrap mt-1">
-            {["🔒 بدون دفع مسبق", "🚚 توصيل 24-48 ساعة", "✨ توصيل مجاني"].map((badge) => (
-              <span
-                key={badge}
-                className="font-body"
-                style={{
-                  fontSize: "10px",
-                  color: "rgba(255,255,255,0.85)",
-                  background: "rgba(0,0,0,0.45)",
-                  backdropFilter: "blur(4px)",
-                  padding: "4px 10px",
-                  borderRadius: "20px",
-                  border: "1px solid rgba(201,151,42,0.25)",
-                }}
-              >
-                {badge}
-              </span>
+          {/* Trust Badges */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-8">
+            {[
+              { emoji: "🔒", label: "بدون دفع مسبق" },
+              { emoji: "🚀", label: "توصيل 24h" },
+              { emoji: "🇲🇦", label: "جميع المدن" },
+            ].map((badge) => (
+              <div key={badge.label} className="flex items-center gap-2">
+                <span className="text-2xl">{badge.emoji}</span>
+                <span
+                  className="font-body font-medium text-sm md:text-base"
+                  style={{ color: "rgba(255,255,255,0.85)", textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}
+                >
+                  {badge.label}
+                </span>
+              </div>
             ))}
           </div>
         </div>

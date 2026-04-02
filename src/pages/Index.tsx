@@ -19,6 +19,7 @@ const Index = () => (
     <Header />
     <HeroSection />
     <Suspense fallback={null}>
+      <HeroTestimonialCarousel />
       <TestimonialTicker />
       <BenefitsSection />
       <PricingSection />
