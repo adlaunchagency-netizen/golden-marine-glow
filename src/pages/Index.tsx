@@ -3,6 +3,7 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 
+const HeroTestimonialCarousel = lazy(() => import("@/components/HeroTestimonialCarousel"));
 const TestimonialTicker = lazy(() => import("@/components/TestimonialTicker"));
 const BenefitsSection = lazy(() => import("@/components/BenefitsSection"));
 const PricingSection = lazy(() => import("@/components/PricingSection"));
