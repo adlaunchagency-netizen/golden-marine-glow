@@ -6,7 +6,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-[32px] left-0 right-0 z-50 bg-dark-bg/95 backdrop-blur-md border-b border-gold/20">
+    <header className="fixed top-[32px] left-0 right-0 z-[55] bg-dark-bg/95 backdrop-blur-md border-b border-gold/20">
       <div className="container flex items-center justify-between h-16 md:h-20">
         <a href="#" className="font-display text-2xl md:text-3xl font-semibold tracking-wide text-gold-light">
           PARAVITA
