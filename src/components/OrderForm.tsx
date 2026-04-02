@@ -3,7 +3,11 @@ import { motion } from "framer-motion";
 import { ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-const cities = [
+const pinnedCities = [
+  "الدار البيضاء", "فاس", "مراكش", "طنجة", "أغادير", "مكناس", "الرباط", "وجدة", "سلا", "القنيطرة",
+];
+
+const otherCities = [
   "Casablanca", "Rabat", "Marrakech", "Fès", "Tanger", "Agadir",
   "Meknès", "Salé", "Oujda", "Kénitra", "Tétouan", "El Jadida",
   "Khénifra", "Beni Mellal", "Nador", "Laâyoune", "Safi", "Mohammedia",
@@ -12,7 +16,9 @@ const cities = [
   "Al Hoceima", "Larache", "Sidi Kacem", "Sidi Slimane", "Azrou",
   "Midelt", "Tan-Tan", "Chefchaouen", "Taounate", "Boulemane",
   "Autre"
-];
+].filter((c) => !pinnedCities.includes(c));
+
+const cities = [...pinnedCities, ...otherCities];
 
 const citySecteurs: Record<string, string[]> = {
   Casablanca: ["Maârif", "Aïn Diab", "Gauthier", "Bourgogne", "Sidi Moumen", "Hay Hassani", "Aïn Chock", "Derb Sultan", "Anfa", "Hay Mohammadi", "Sbata", "Ben M'Sick", "Moulay Rachid"],
