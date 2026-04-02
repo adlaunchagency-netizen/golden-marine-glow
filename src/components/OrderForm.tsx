@@ -1,24 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, Search } from "lucide-react";
+import { ChevronDown, Search, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useCities } from "@/hooks/useCities";
 
-const pinnedCities = [
-  "الدار البيضاء", "فاس", "مراكش", "طنجة", "أغادير", "مكناس", "الرباط", "وجدة", "سلا", "القنيطرة",
+const pinnedCityNames = [
+  "Casablanca", "Fes", "Marrakech", "Tanger", "Agadir", "Meknes", "Rabat", "Oujda", "Sale", "Kenitra",
 ];
-
-const otherCities = [
-  "Casablanca", "Rabat", "Marrakech", "Fès", "Tanger", "Agadir",
-  "Meknès", "Salé", "Oujda", "Kénitra", "Tétouan", "El Jadida",
-  "Khénifra", "Beni Mellal", "Nador", "Laâyoune", "Safi", "Mohammedia",
-  "Khouribga", "Settat", "Berrechid", "Taza", "Errachidia", "Guelmim",
-  "Ifrane", "Essaouira", "Taroudant", "Ouarzazate", "Dakhla", "Tiznit",
-  "Al Hoceima", "Larache", "Sidi Kacem", "Sidi Slimane", "Azrou",
-  "Midelt", "Tan-Tan", "Chefchaouen", "Taounate", "Boulemane",
-  "Autre"
-].filter((c) => !pinnedCities.includes(c));
-
-const cities = [...pinnedCities, ...otherCities];
 
 const citySecteurs: Record<string, string[]> = {
   Casablanca: ["Maârif", "Aïn Diab", "Gauthier", "Bourgogne", "Sidi Moumen", "Hay Hassani", "Aïn Chock", "Derb Sultan", "Anfa", "Hay Mohammadi", "Sbata", "Ben M'Sick", "Moulay Rachid"],
@@ -46,6 +34,7 @@ const offerPriceMap: Record<string, number> = {
 };
 
 const OrderForm = () => {
+  const { cities: dbCities, loading: citiesLoading, error: citiesError } = useCities();
   const [form, setForm] = useState({
     customer_name: "",
     phone: "",
@@ -72,7 +61,13 @@ const OrderForm = () => {
     return () => window.removeEventListener("select-offer", handler);
   }, []);
 
-  const filteredCities = cities.filter((c) =>
+  // Sort cities: pinned first, then rest alphabetically
+  const allCityNames = dbCities.map((c) => c.city_name);
+  const pinned = allCityNames.filter((c) => pinnedCityNames.includes(c));
+  const rest = allCityNames.filter((c) => !pinnedCityNames.includes(c));
+  const sortedCities = [...pinned, ...rest];
+
+  const filteredCities = sortedCities.filter((c) =>
     c.toLowerCase().includes(citySearch.toLowerCase())
   );
 
@@ -211,8 +206,8 @@ const OrderForm = () => {
             </button>
 
             {cityOpen && (
-              <div className="absolute z-50 top-full mt-1 w-full bg-dark-bg border border-gold/30 rounded-xl overflow-hidden shadow-lg max-h-60">
-                <div className="flex items-center gap-2 px-3 py-2 border-b border-gold/20">
+              <div className="absolute z-50 top-full mt-1 w-full bg-dark-bg border border-gold/30 rounded-xl overflow-hidden shadow-lg max-h-[400px]">
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-gold/20">
                   <Search className="w-4 h-4 text-gold-light/40 shrink-0" />
                   <input
                     type="text"
@@ -223,13 +218,18 @@ const OrderForm = () => {
                     className="w-full bg-transparent text-champagne font-body text-sm placeholder:text-gold-light/30 focus:outline-none"
                   />
                 </div>
-                <ul className="overflow-y-auto max-h-48">
-                  {filteredCities.length === 0 ? (
+                <ul className="overflow-y-auto max-h-[340px]">
+                  {citiesLoading ? (
+                    <li className="px-4 py-3 text-sm text-gold-light/40 font-body flex items-center gap-2 justify-center">
+                      <Loader2 className="w-4 h-4 animate-spin" /> جاري تحميل المدن...
+                    </li>
+                  ) : citiesError ? (
+                    <li className="px-4 py-3 text-sm text-red-400 font-body text-center">{citiesError}</li>
+                  ) : filteredCities.length === 0 ? (
                     <li className="px-4 py-3 text-sm text-gold-light/40 font-body">لا توجد نتائج</li>
                   ) : (
                     <>
-                      {/* Pinned cities */}
-                      {filteredCities.filter((c) => pinnedCities.includes(c)).map((c) => (
+                      {filteredCities.filter((c) => pinnedCityNames.includes(c)).map((c) => (
                         <li key={c}>
                           <button
                             type="button"
@@ -248,14 +248,12 @@ const OrderForm = () => {
                           </button>
                         </li>
                       ))}
-                      {/* Separator */}
-                      {!citySearch && filteredCities.some((c) => !pinnedCities.includes(c)) && (
+                      {!citySearch && filteredCities.some((c) => !pinnedCityNames.includes(c)) && (
                         <li className="px-4 py-2 text-xs text-gold-light/40 font-body border-t border-b border-gold/10 bg-gold/5 text-center select-none">
                           --- المزيد (بحث) ---
                         </li>
                       )}
-                      {/* Other cities */}
-                      {filteredCities.filter((c) => !pinnedCities.includes(c)).map((c) => (
+                      {filteredCities.filter((c) => !pinnedCityNames.includes(c)).map((c) => (
                         <li key={c}>
                           <button
                             type="button"
