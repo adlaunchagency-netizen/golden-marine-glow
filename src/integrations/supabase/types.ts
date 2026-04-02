@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      ameex_cities: {
+        Row: {
+          city_name: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          city_name: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          city_name?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           city: string
