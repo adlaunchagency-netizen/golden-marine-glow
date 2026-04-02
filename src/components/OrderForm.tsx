@@ -219,12 +219,17 @@ const OrderForm = () => {
                   />
                 </div>
                 <ul className="overflow-y-auto max-h-[340px]">
-                  {filteredCities.length === 0 ? (
+                  {citiesLoading ? (
+                    <li className="px-4 py-3 text-sm text-gold-light/40 font-body flex items-center gap-2 justify-center">
+                      <Loader2 className="w-4 h-4 animate-spin" /> جاري تحميل المدن...
+                    </li>
+                  ) : citiesError ? (
+                    <li className="px-4 py-3 text-sm text-red-400 font-body text-center">{citiesError}</li>
+                  ) : filteredCities.length === 0 ? (
                     <li className="px-4 py-3 text-sm text-gold-light/40 font-body">لا توجد نتائج</li>
                   ) : (
                     <>
-                      {/* Pinned cities */}
-                      {filteredCities.filter((c) => pinnedCities.includes(c)).map((c) => (
+                      {filteredCities.filter((c) => pinnedCityNames.includes(c)).map((c) => (
                         <li key={c}>
                           <button
                             type="button"
@@ -243,14 +248,12 @@ const OrderForm = () => {
                           </button>
                         </li>
                       ))}
-                      {/* Separator */}
-                      {!citySearch && filteredCities.some((c) => !pinnedCities.includes(c)) && (
+                      {!citySearch && filteredCities.some((c) => !pinnedCityNames.includes(c)) && (
                         <li className="px-4 py-2 text-xs text-gold-light/40 font-body border-t border-b border-gold/10 bg-gold/5 text-center select-none">
                           --- المزيد (بحث) ---
                         </li>
                       )}
-                      {/* Other cities */}
-                      {filteredCities.filter((c) => !pinnedCities.includes(c)).map((c) => (
+                      {filteredCities.filter((c) => !pinnedCityNames.includes(c)).map((c) => (
                         <li key={c}>
                           <button
                             type="button"
