@@ -206,8 +206,8 @@ const OrderForm = () => {
             </button>
 
             {cityOpen && (
-              <div className="absolute z-50 top-full mt-1 w-full bg-dark-bg border border-gold/30 rounded-xl overflow-hidden shadow-lg max-h-60">
-                <div className="flex items-center gap-2 px-3 py-2 border-b border-gold/20">
+              <div className="absolute z-50 top-full mt-1 w-full bg-dark-bg border border-gold/30 rounded-xl overflow-hidden shadow-lg max-h-[400px]">
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-gold/20">
                   <Search className="w-4 h-4 text-gold-light/40 shrink-0" />
                   <input
                     type="text"
