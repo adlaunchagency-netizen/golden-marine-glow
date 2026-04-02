@@ -34,6 +34,7 @@ const offerPriceMap: Record<string, number> = {
 };
 
 const OrderForm = () => {
+  const { cities: dbCities, loading: citiesLoading, error: citiesError } = useCities();
   const [form, setForm] = useState({
     customer_name: "",
     phone: "",
@@ -60,7 +61,13 @@ const OrderForm = () => {
     return () => window.removeEventListener("select-offer", handler);
   }, []);
 
-  const filteredCities = cities.filter((c) =>
+  // Sort cities: pinned first, then rest alphabetically
+  const allCityNames = dbCities.map((c) => c.city_name);
+  const pinned = allCityNames.filter((c) => pinnedCityNames.includes(c));
+  const rest = allCityNames.filter((c) => !pinnedCityNames.includes(c));
+  const sortedCities = [...pinned, ...rest];
+
+  const filteredCities = sortedCities.filter((c) =>
     c.toLowerCase().includes(citySearch.toLowerCase())
   );
 
