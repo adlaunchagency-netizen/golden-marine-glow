@@ -218,7 +218,7 @@ const OrderForm = () => {
                     className="w-full bg-transparent text-champagne font-body text-sm placeholder:text-gold-light/30 focus:outline-none"
                   />
                 </div>
-                <ul className="overflow-y-auto max-h-48">
+                <ul className="overflow-y-auto max-h-[340px]">
                   {filteredCities.length === 0 ? (
                     <li className="px-4 py-3 text-sm text-gold-light/40 font-body">لا توجد نتائج</li>
                   ) : (
