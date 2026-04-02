@@ -3,7 +3,11 @@ import { motion } from "framer-motion";
 import { ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-const cities = [
+const pinnedCities = [
+  "الدار البيضاء", "فاس", "مراكش", "طنجة", "أغادير", "مكناس", "الرباط", "وجدة", "سلا", "القنيطرة",
+];
+
+const otherCities = [
   "Casablanca", "Rabat", "Marrakech", "Fès", "Tanger", "Agadir",
   "Meknès", "Salé", "Oujda", "Kénitra", "Tétouan", "El Jadida",
   "Khénifra", "Beni Mellal", "Nador", "Laâyoune", "Safi", "Mohammedia",
@@ -12,7 +16,9 @@ const cities = [
   "Al Hoceima", "Larache", "Sidi Kacem", "Sidi Slimane", "Azrou",
   "Midelt", "Tan-Tan", "Chefchaouen", "Taounate", "Boulemane",
   "Autre"
-];
+].filter((c) => !pinnedCities.includes(c));
+
+const cities = [...pinnedCities, ...otherCities];
 
 const citySecteurs: Record<string, string[]> = {
   Casablanca: ["Maârif", "Aïn Diab", "Gauthier", "Bourgogne", "Sidi Moumen", "Hay Hassani", "Aïn Chock", "Derb Sultan", "Anfa", "Hay Mohammadi", "Sbata", "Ben M'Sick", "Moulay Rachid"],
@@ -221,25 +227,54 @@ const OrderForm = () => {
                   {filteredCities.length === 0 ? (
                     <li className="px-4 py-3 text-sm text-gold-light/40 font-body">لا توجد نتائج</li>
                   ) : (
-                    filteredCities.map((c) => (
-                      <li key={c}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setForm({ ...form, city: c, secteur: "" });
-                            setCityOpen(false);
-                            setCitySearch("");
-                          }}
-                          className={`w-full text-right px-4 py-3 text-sm font-body transition-colors ${
-                            form.city === c
-                              ? "bg-gold/20 text-gold-light"
-                              : "text-champagne/80 hover:bg-gold/10"
-                          }`}
-                        >
-                          {c}
-                        </button>
-                      </li>
-                    ))
+                    <>
+                      {/* Pinned cities */}
+                      {filteredCities.filter((c) => pinnedCities.includes(c)).map((c) => (
+                        <li key={c}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setForm({ ...form, city: c, secteur: "" });
+                              setCityOpen(false);
+                              setCitySearch("");
+                            }}
+                            className={`w-full text-right px-4 min-h-[44px] flex items-center text-sm font-body font-medium transition-colors ${
+                              form.city === c
+                                ? "bg-gold/20 text-gold-light"
+                                : "text-champagne hover:bg-gold/10"
+                            }`}
+                          >
+                            {c}
+                          </button>
+                        </li>
+                      ))}
+                      {/* Separator */}
+                      {!citySearch && filteredCities.some((c) => !pinnedCities.includes(c)) && (
+                        <li className="px-4 py-2 text-xs text-gold-light/40 font-body border-t border-b border-gold/10 bg-gold/5 text-center select-none">
+                          --- المزيد (بحث) ---
+                        </li>
+                      )}
+                      {/* Other cities */}
+                      {filteredCities.filter((c) => !pinnedCities.includes(c)).map((c) => (
+                        <li key={c}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setForm({ ...form, city: c, secteur: "" });
+                              setCityOpen(false);
+                              setCitySearch("");
+                            }}
+                            className={`w-full text-right px-4 min-h-[44px] flex items-center text-sm font-body transition-colors ${
+                              form.city === c
+                                ? "bg-gold/20 text-gold-light"
+                                : "text-champagne/80 hover:bg-gold/10"
+                            }`}
+                          >
+                            {c}
+                          </button>
+                        </li>
+                      ))}
+                    </>
                   )}
                 </ul>
               </div>
