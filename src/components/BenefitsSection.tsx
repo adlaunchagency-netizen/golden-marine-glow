@@ -1,43 +1,48 @@
-import AnimatedSection from "./AnimatedSection";
-import benefitSkin from "@/assets/benefit-glowing-skin.jpg";
-import benefitHydration from "@/assets/benefit-hydration.jpg";
-import benefitHairNails from "@/assets/benefit-hair-nails.jpg";
-import benefitNatural from "@/assets/benefit-natural-clean.png";
-
-const benefits = [
-  { img: benefitSkin, title: "بشرة مشرقة ونضرة", desc: "يحفز إنتاج الكولاجين الطبيعي ويعيد النضارة والإشراق لبشرتك.", isProduct: false },
-  { img: benefitHydration, title: "ترطيب عميق", desc: "ببتيدات بحرية عالية الامتصاص تغذي البشرة من الداخل.", isProduct: false },
-  { img: benefitHairNails, title: "شعر وأظافر أقوى", desc: "يقوي بصيلات الشعر والأظافر ويحميها من التكسر.", isProduct: false },
-  { img: benefitNatural, title: "طبيعي 100%", desc: "مستخلص من أسماك برية، بدون مواد كيميائية أو حافظات.", isProduct: true },
-];
-
 const BenefitsSection = () => (
-  <section id="benefits" className="py-20 md:py-28 bg-champagne">
-    <div className="container">
-      <AnimatedSection className="text-center mb-14">
-        <p className="font-body text-sm tracking-wider text-gold-dark font-medium mb-3">علاش Neo Collagen؟</p>
-        <h2 className="font-body text-3xl md:text-4xl font-bold text-foreground mb-4">
-          فوائد <span className="text-gold-gradient">Paravita Neo</span>
-        </h2>
-        <div className="divider-gold mt-6" />
-      </AnimatedSection>
+  <section dir="rtl" style={{ background: '#FDFAF4', padding: '32px 18px 28px' }}>
+    <div style={{ textAlign: 'center', marginBottom: 20 }}>
+      <div style={{ fontSize: 12, fontWeight: 700, color: '#8B6914', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
+        — لماذا Neo Collagen PARAVITA؟ —
+      </div>
+      <h2 style={{ fontSize: 20, fontWeight: 900, color: '#1E1208', lineHeight: 1.3, margin: 0 }}>
+        مكونات طبيعية — نتائج حقيقية
+      </h2>
+    </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {benefits.map((b, i) => (
-          <AnimatedSection key={b.title} delay={i * 0.1} className="text-center group bg-background p-6 rounded-xl border border-border hover:border-gold/40 transition-colors">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden flex items-center justify-center bg-white transition-colors" style={{ border: "1px solid rgba(201,151,42,0.5)" }}>
-              <img src={b.img} alt={b.title} width={80} height={80} loading="lazy" decoding="async" className={b.isProduct ? "h-[95%] w-auto object-contain" : "w-full h-full object-cover"} />
-            </div>
-            <h3 className="font-body text-lg font-bold text-foreground mb-2">{b.title}</h3>
-            <p className="font-body text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
-          </AnimatedSection>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
+      {[
+        { icon: '✨', title: 'بشرة مشرقة', desc: 'ينشط إنتاج الكولاجين الطبيعي' },
+        { icon: '💧', title: 'ترطيب عميق', desc: 'بيبتيدات بحرية عالية الامتصاص' },
+        { icon: '💪', title: 'شعر وأظافر', desc: 'يقوي البصيلات ويحمي من التكسر' },
+        { icon: '🌿', title: 'طبيعي 100%', desc: 'مستخلص من أسماك برية — بلا حافظات' },
+      ].map((b, i) => (
+        <div key={i} style={{ background: '#fff', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 14, padding: '14px 12px', textAlign: 'center' }}>
+          <div style={{ fontSize: 24, marginBottom: 6 }}>{b.icon}</div>
+          <div style={{ fontSize: 13, fontWeight: 800, color: '#1E1208', marginBottom: 4 }}>{b.title}</div>
+          <div style={{ fontSize: 11, color: '#7A5C45', lineHeight: 1.4 }}>{b.desc}</div>
+        </div>
+      ))}
+    </div>
+
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, background: 'rgba(45,122,79,0.05)', border: '1px solid rgba(45,122,79,0.15)', borderRadius: 12, padding: '10px 14px' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
+        {[
+          { icon: '🌿', text: 'حلال مُعتمد' },
+          { icon: '🧪', text: 'Gluten Free' },
+          { icon: '🐟', text: 'كولاجين بحري نقي' },
+          { icon: '🇲🇦', text: 'موثوق في المغرب' },
+        ].map((c, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11.5, fontWeight: 600, color: '#2D7A4F' }}>
+            <span>{c.icon}</span>
+            <span>{c.text}</span>
+          </div>
         ))}
       </div>
-
-      <p className="font-body text-xs text-muted-foreground text-center mt-8">
-        * هذه المعلومات لأغراض تثقيفية فقط. النتائج تتفاوت من شخص لآخر.
-      </p>
     </div>
+
+    <p style={{ fontSize: 10, color: '#bbb', textAlign: 'center', marginTop: 12, lineHeight: 1.5 }}>
+      * هذه المعلومات لأغراض تثقيفية فقط. النتائج تتفاوت من شخص لآخر.
+    </p>
   </section>
 );
 
