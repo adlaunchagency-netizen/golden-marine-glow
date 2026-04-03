@@ -5,6 +5,7 @@ const BenefitsSection = () => (
     {/* Background product image */}
     <img
       src={productBottle}
+      loading="lazy"
       alt=""
       aria-hidden="true"
       style={{

@@ -33,6 +33,7 @@ const TestimonialsSection = () => (
         <div key={i} style={{ background: "#fff", border: "1px solid rgba(201,168,76,0.18)", borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
             <img
+              loading="lazy"
               src={t.image}
               alt={t.name}
               style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", objectPosition: "center top", border: "2px solid rgba(201,168,76,0.3)", flexShrink: 0 }}
