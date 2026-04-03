@@ -10,8 +10,10 @@ const HeroSection = () => {
 
   return (
     <section className="w-full" dir="rtl" style={{ marginTop: 0, paddingTop: 0 }}>
+      {/* Spacer for fixed header */}
+      <div style={{ height: 64 }} />
       {/* Hero image with floating badges */}
-      <div style={{ position: "relative", width: "100%", height: "420px", overflow: "hidden" }}>
+      <div style={{ position: "relative", width: "100%", height: "420px", overflow: "hidden", marginTop: 0, paddingTop: 0 }}>
         <img
           src={heroImg}
           alt="امرأة مغربية تستخدم كولاجين باراڤيتا"
