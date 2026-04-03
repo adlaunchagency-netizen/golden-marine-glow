@@ -13,7 +13,7 @@ const BenefitsSection = () => (
         top: '50%',
         transform: 'translate(-50%, -50%)',
         height: '110%',
-        opacity: 0.06,
+        opacity: 0.18,
         pointerEvents: 'none',
         zIndex: 0,
       }}
