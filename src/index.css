@@ -46,6 +46,14 @@
     --shadow-gold: 0 4px 30px -5px hsl(40 68% 47% / 0.25);
     --shadow-elevated: 0 20px 60px -15px hsl(36 30% 8% / 0.12);
 
+    --cream: #FDFAF4;
+    --brown-text: #1E1208;
+    --soft-text: #7A5C45;
+    --green-trust: #2D7A4F;
+    --gold-hex: #C9A84C;
+    --gold-light-hex: #E8C96A;
+    --gold-dark-hex: #8B6914;
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
