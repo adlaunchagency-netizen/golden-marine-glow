@@ -40,7 +40,7 @@
     --dark-bg: 36 30% 6%;
     --champagne: 44 85% 94%;
 
-    --font-display: 'Playfair Display', serif;
+    --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'Cairo', sans-serif;
 
     --shadow-gold: 0 4px 30px -5px hsl(40 68% 47% / 0.25);
