@@ -7,7 +7,7 @@ const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"
 const HeroTestimonialCarousel = lazy(() => import("@/components/HeroTestimonialCarousel"));
 const TestimonialTicker = lazy(() => import("@/components/TestimonialTicker"));
 const BenefitsSection = lazy(() => import("@/components/BenefitsSection"));
-const PricingSection = lazy(() => import("@/components/PricingSection"));
+const OfferSection = lazy(() => import("@/components/OfferSection"));
 const FaqSection = lazy(() => import("@/components/FaqSection"));
 const OrderForm = lazy(() => import("@/components/OrderForm"));
 const Footer = lazy(() => import("@/components/Footer"));
@@ -32,6 +32,21 @@ const Index = () => {
     document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleSelectOffer = (label: string, price: number, qty: number) => {
+    // Map to existing offer values used by OrderForm
+    const valueMap: Record<number, string> = { 1: "1-box-199", 3: "3-boxes-299", 4: "4-boxes-399" };
+    const offerValue = valueMap[qty] || "1-box-199";
+    window.dispatchEvent(new CustomEvent("select-offer", { detail: offerValue }));
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "AddToCart", {
+        content_name: "Paravita Neo Collagen",
+        value: price,
+        currency: "MAD",
+      });
+    }
+    document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen">
       <AnnouncementBar />
@@ -42,7 +57,7 @@ const Index = () => {
         <HeroTestimonialCarousel />
         <TestimonialTicker />
         <BenefitsSection />
-        <PricingSection />
+        <OfferSection onSelectOffer={handleSelectOffer} />
         <FaqSection />
         <OrderForm />
         <Footer />
