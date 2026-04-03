@@ -58,8 +58,8 @@ const Index = () => {
         <TestimonialTicker />
         <BenefitsSection />
         <OfferSection onSelectOffer={handleSelectOffer} />
-        <FaqSection />
         <OrderForm />
+        <FaqSection />
         <Footer />
         <WhatsAppButton />
       </Suspense>
