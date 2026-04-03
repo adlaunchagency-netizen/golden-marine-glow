@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const Header = () => {
@@ -45,45 +44,38 @@ const Header = () => {
         </button>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-dark-bg border-b border-gold/20 overflow-hidden"
-          >
-            <nav className="flex flex-col items-center gap-6 py-8">
-              {[
-                { label: "المزايا", href: "#benefits" },
-                { label: "العروض", href: "#pricing" },
-                { label: "آراء الزبونات", href: "#testimonials" },
-              ].map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="font-body text-base font-medium text-gold-light/80"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  if (typeof window !== "undefined" && window.fbq) {
-                    window.fbq("track", "AddToCart");
-                  }
-                  document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth", block: "center" });
-                }}
-                className="bg-gold-gradient text-dark-bg font-body text-base font-bold px-8 py-3 rounded-lg"
+      {open && (
+        <div className="md:hidden bg-dark-bg border-b border-gold/20 overflow-hidden">
+          <nav className="flex flex-col items-center gap-6 py-8">
+            {[
+              { label: "المزايا", href: "#benefits" },
+              { label: "العروض", href: "#pricing" },
+              { label: "آراء الزبونات", href: "#testimonials" },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="font-body text-base font-medium text-gold-light/80"
               >
-                اطلبي الآن
-              </button>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {link.label}
+              </a>
+            ))}
+            <button
+              onClick={() => {
+                setOpen(false);
+                if (typeof window !== "undefined" && window.fbq) {
+                  window.fbq("track", "AddToCart");
+                }
+                document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth", block: "center" });
+              }}
+              className="bg-gold-gradient text-dark-bg font-body text-base font-bold px-8 py-3 rounded-lg"
+            >
+              اطلبي الآن
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
