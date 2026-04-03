@@ -1,10 +1,11 @@
-import productBottle from "@/assets/product-bottle.png";
+import productBottle from "@/assets/product-bottle.webp";
 
 const BenefitsSection = () => (
   <section dir="rtl" style={{ background: '#FDFAF4', padding: '32px 18px 28px', position: 'relative', overflow: 'hidden' }}>
     {/* Background product image */}
     <img
       src={productBottle}
+      loading="lazy"
       alt=""
       aria-hidden="true"
       style={{

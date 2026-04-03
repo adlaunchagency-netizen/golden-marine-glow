@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
-import bundle1 from "@/assets/bundle-1.png";
-import bundle3 from "@/assets/bundle-3.png";
-import bundle4 from "@/assets/bundle-4.png";
+import bundle1 from "@/assets/bundle-1.webp";
+import bundle3 from "@/assets/bundle-3.webp";
+import bundle4 from "@/assets/bundle-4.webp";
 
 const tiers = [
   {
