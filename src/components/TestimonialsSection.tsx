@@ -1,22 +1,24 @@
-import testimonialImg from "@/assets/testimonial-faces.png";
+import testimonial1 from "@/assets/testimonial-1.png";
+import testimonial2 from "@/assets/testimonial-2.png";
+import testimonial3 from "@/assets/testimonial-3.png";
 
 const testimonials = [
   {
     name: "فاطمة الزهراء",
     city: "الدار البيضاء",
-    objectPosition: "center top",
+    image: testimonial1,
     text: "بعد شهر واحد، لاحظت فرقاً كبيراً في بشرتي. الجلد أصبح أكثر نضارة وحيوية. أنصح به كل امرأة فوق 30!",
   },
   {
     name: "سمية بنعلي",
     city: "مراكش",
-    objectPosition: "40% top",
+    image: testimonial2,
     text: "الصراحة ما كنت مصدقة، لكن بعد 3 أسابيع شفت النتيجة. الدفع عند الاستلام خلاني نجرب بدون خوف.",
   },
   {
     name: "نورة الإدريسي",
     city: "الرباط",
-    objectPosition: "60% top",
+    image: testimonial3,
     text: "المنتج رائع، التوصيل كان سريع جداً. استلمت الطلب في يومين بالضبط. شكراً باراڤيتا!",
   },
 ];
@@ -31,9 +33,9 @@ const TestimonialsSection = () => (
         <div key={i} style={{ background: "#fff", border: "1px solid rgba(201,168,76,0.18)", borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
             <img
-              src={testimonialImg}
+              src={t.image}
               alt={t.name}
-              style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", objectPosition: t.objectPosition, border: "2px solid rgba(201,168,76,0.3)", flexShrink: 0 }}
+              style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", objectPosition: "center top", border: "2px solid rgba(201,168,76,0.3)", flexShrink: 0 }}
             />
             <div>
               <div style={{ fontSize: 13, fontWeight: 700, color: "var(--brown-text)" }}>{t.name}</div>
