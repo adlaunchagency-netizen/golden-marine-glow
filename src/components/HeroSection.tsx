@@ -9,7 +9,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="w-full" dir="rtl">
+    <section className="w-full" dir="rtl" style={{ marginTop: 0, paddingTop: 0 }}>
       {/* Hero image with floating badges */}
       <div style={{ position: "relative", width: "100%", height: "420px", overflow: "hidden" }}>
         <img
