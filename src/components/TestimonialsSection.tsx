@@ -1,6 +1,6 @@
-import testimonial1 from "@/assets/testimonial-1.png";
-import testimonial2 from "@/assets/testimonial-2.png";
-import testimonial3 from "@/assets/testimonial-3.png";
+import testimonial1 from "@/assets/testimonial-1.webp";
+import testimonial2 from "@/assets/testimonial-2.webp";
+import testimonial3 from "@/assets/testimonial-3.webp";
 
 const testimonials = [
   {

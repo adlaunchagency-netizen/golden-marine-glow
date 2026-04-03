@@ -1,6 +1,6 @@
 import offerSingle from "@/assets/offer-single.webp";
-import offerThree from "@/assets/offer-three.jpg";
-import offerFour from "@/assets/offer-four.jpg";
+import offerThree from "@/assets/offer-three.webp";
+import offerFour from "@/assets/offer-four.webp";
 
 interface OfferProps {
   onSelectOffer: (label: string, price: number, qty: number) => void;

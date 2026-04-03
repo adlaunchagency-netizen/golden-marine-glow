@@ -1,4 +1,4 @@
-import heroImg from "@/assets/hero-new.png";
+import heroImg from "@/assets/hero-new.webp";
 
 const HeroSection = () => {
   const scrollToOrder = () => {
