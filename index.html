@@ -13,7 +13,10 @@
     <!-- Preload hero image for fast LCP -->
     <link rel="preload" as="image" type="image/webp" href="/hero-new.webp" fetchpriority="high" />
 
-    <!-- Non-render-blocking fonts — delay until after FCP -->
+    <!-- DNS prefetch for deferred third-party origins -->
+    <link rel="dns-prefetch" href="https://connect.facebook.net" />
+    <link rel="dns-prefetch" href="https://www.clarity.ms" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Inline critical CSS for instant FCP -->
