@@ -9,19 +9,34 @@
 
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preload hero image for fast LCP -->
+    <link rel="preload" as="image" type="image/webp" href="/hero-new.webp" fetchpriority="high" />
+
+    <!-- Non-render-blocking fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://supabase.co" />
-    <link rel="dns-prefetch" href="https://supabase.co" />
-    <!-- Non-render-blocking font load -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+    <!-- Inline critical CSS for instant FCP -->
     <style>
-      body{font-family:'Cairo',sans-serif;margin:0}
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      body{font-family:'Cairo',system-ui,sans-serif;background:#FDFAF4;color:#1E1208;direction:rtl;-webkit-font-smoothing:antialiased}
       #root{min-height:100vh}
     </style>
-    <!-- Meta Pixel -->
+
+    <!-- OG tags -->
+    <meta property="og:title" content="Paravita Neo Collagen | كولاجين بحري طبيعي">
+    <meta name="twitter:title" content="Paravita Neo Collagen | كولاجين بحري طبيعي">
+    <meta property="og:description" content="كولاجين بحري طبيعي 100% من Paravita - للبشرة المشرقة والشعر القوي. توصيل مجاني والدفع عند الاستلام.">
+    <meta name="twitter:description" content="كولاجين بحري طبيعي 100% من Paravita - للبشرة المشرقة والشعر القوي. توصيل مجاني والدفع عند الاستلام.">
+    <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5ad63821-5d30-4e98-b276-816b50ff4204/id-preview-58ff1cad--995e53c4-fd51-4e1a-a20e-75c58d1abf12.lovable.app-1774720960242.png">
+    <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5ad63821-5d30-4e98-b276-816b50ff4204/id-preview-58ff1cad--995e53c4-fd51-4e1a-a20e-75c58d1abf12.lovable.app-1774720960242.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Analytics (async, non-blocking) -->
     <script async>
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -31,14 +46,6 @@
       fbq('init','906905265342740');
       fbq('track','PageView');
     </script>
-    <!-- End Meta Pixel -->
-    <meta property="og:title" content="Paravita Neo Collagen | كولاجين بحري طبيعي">
-    <meta name="twitter:title" content="Paravita Neo Collagen | كولاجين بحري طبيعي">
-    <meta property="og:description" content="كولاجين بحري طبيعي 100% من Paravita - للبشرة المشرقة والشعر القوي. توصيل مجاني والدفع عند الاستلام.">
-    <meta name="twitter:description" content="كولاجين بحري طبيعي 100% من Paravita - للبشرة المشرقة والشعر القوي. توصيل مجاني والدفع عند الاستلام.">
-    <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5ad63821-5d30-4e98-b276-816b50ff4204/id-preview-58ff1cad--995e53c4-fd51-4e1a-a20e-75c58d1abf12.lovable.app-1774720960242.png">
-    <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5ad63821-5d30-4e98-b276-816b50ff4204/id-preview-58ff1cad--995e53c4-fd51-4e1a-a20e-75c58d1abf12.lovable.app-1774720960242.png">
-    <meta name="twitter:card" content="summary_large_image">
     <script>
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
