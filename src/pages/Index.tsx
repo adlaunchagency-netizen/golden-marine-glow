@@ -49,7 +49,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <AnnouncementBar />
+      
       <Header />
       <HeroSection />
       <Suspense fallback={null}><TestimonialsSection /></Suspense>
