@@ -17,9 +17,9 @@ const HeroSection = () => {
           alt="امرأة مغربية تستخدم كولاجين باراڤيتا"
           fetchPriority="high"
           loading="eager"
-          decoding="sync"
-          width={390}
-          height={460}
+          decoding="async"
+          width={480}
+          height={860}
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%", display: "block" }}
         />
         {/* Bottom fade */}
