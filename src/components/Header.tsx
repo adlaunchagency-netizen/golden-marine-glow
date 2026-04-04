@@ -47,7 +47,7 @@ const Header = () => {
         </nav>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-gold-light" aria-label="Menu">
-          {open ? <X size={24} /> : <Menu size={24} />}
+          {open ? <XIcon /> : <MenuIcon />}
         </button>
       </div>
 
