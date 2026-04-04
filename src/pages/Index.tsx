@@ -52,17 +52,15 @@ const Index = () => {
       <AnnouncementBar />
       <Header />
       <HeroSection />
-      <Suspense fallback={null}>
-        <TestimonialsSection />
-        <HeroTestimonialCarousel />
-        <TestimonialTicker />
-        <BenefitsSection />
-        <OfferSection onSelectOffer={handleSelectOffer} />
-        <OrderForm />
-        <FaqSection />
-        <Footer />
-        <WhatsAppButton />
-      </Suspense>
+      <Suspense fallback={null}><TestimonialsSection /></Suspense>
+      <Suspense fallback={null}><HeroTestimonialCarousel /></Suspense>
+      <Suspense fallback={null}><TestimonialTicker /></Suspense>
+      <Suspense fallback={null}><BenefitsSection /></Suspense>
+      <Suspense fallback={null}><OfferSection onSelectOffer={handleSelectOffer} /></Suspense>
+      <Suspense fallback={null}><OrderForm /></Suspense>
+      <Suspense fallback={null}><FaqSection /></Suspense>
+      <Suspense fallback={null}><Footer /></Suspense>
+      <Suspense fallback={null}><WhatsAppButton /></Suspense>
 
       {/* Sticky CTA bar */}
       <div
