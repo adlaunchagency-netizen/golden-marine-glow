@@ -4,55 +4,55 @@
 
 @layer base {
   :root {
-    --background: 40 60% 96%;
-    --foreground: 36 30% 8%;
+    --background: 210 20% 96%;
+    --foreground: 215 25% 12%;
 
-    --card: 40 50% 94%;
-    --card-foreground: 36 30% 8%;
+    --card: 210 15% 94%;
+    --card-foreground: 215 25% 12%;
 
-    --popover: 40 60% 96%;
-    --popover-foreground: 36 30% 8%;
+    --popover: 210 20% 96%;
+    --popover-foreground: 215 25% 12%;
 
-    --primary: 40 68% 47%;
-    --primary-foreground: 40 60% 96%;
+    --primary: 174 84% 32%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 40% 90%;
-    --secondary-foreground: 36 30% 15%;
+    --secondary: 174 30% 90%;
+    --secondary-foreground: 215 25% 15%;
 
-    --muted: 40 25% 91%;
-    --muted-foreground: 36 15% 45%;
+    --muted: 210 15% 91%;
+    --muted-foreground: 215 10% 45%;
 
-    --accent: 40 50% 85%;
-    --accent-foreground: 36 30% 8%;
+    --accent: 174 40% 85%;
+    --accent-foreground: 215 25% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 40 30% 85%;
-    --input: 40 30% 85%;
-    --ring: 40 68% 47%;
+    --border: 210 20% 85%;
+    --input: 210 20% 85%;
+    --ring: 174 84% 32%;
 
     --radius: 0.5rem;
 
-    --gold: 40 68% 47%;
-    --gold-light: 42 72% 64%;
-    --gold-dark: 38 72% 39%;
-    --dark-bg: 36 30% 6%;
-    --champagne: 44 85% 94%;
+    --teal: 174 84% 32%;
+    --teal-light: 174 60% 50%;
+    --teal-dark: 174 90% 24%;
+    --dark-bg: 215 35% 17%;
+    --champagne: 210 30% 96%;
 
     --font-display: 'Playfair Display', Georgia, serif;
-    --font-body: 'Cairo', sans-serif;
+    --font-body: 'Almarai', sans-serif;
 
-    --shadow-gold: 0 4px 30px -5px hsl(40 68% 47% / 0.25);
-    --shadow-elevated: 0 20px 60px -15px hsl(36 30% 8% / 0.12);
+    --shadow-teal: 0 4px 30px -5px hsl(174 84% 32% / 0.25);
+    --shadow-elevated: 0 20px 60px -15px hsl(215 25% 12% / 0.12);
 
-    --cream: #FDFAF4;
-    --brown-text: #1E1208;
-    --soft-text: #7A5C45;
-    --green-trust: #2D7A4F;
-    --gold-hex: #C9A84C;
-    --gold-light-hex: #E8C96A;
-    --gold-dark-hex: #8B6914;
+    --cream: #F8FAFB;
+    --brown-text: #1E293B;
+    --soft-text: #64748B;
+    --green-trust: #0D9488;
+    --gold-hex: #0D9488;
+    --gold-light-hex: #14B8A6;
+    --gold-dark-hex: #0F766E;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -89,10 +89,10 @@
   }
   .text-gold-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
+    background-image: linear-gradient(135deg, hsl(var(--teal-light)), hsl(var(--teal)), hsl(var(--teal-dark)));
   }
   .bg-gold-gradient {
-    background-image: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
+    background-image: linear-gradient(135deg, hsl(var(--teal-light)), hsl(var(--teal)), hsl(var(--teal-dark)));
   }
   .bg-dark {
     background-color: hsl(var(--dark-bg));
@@ -101,11 +101,11 @@
     background-color: hsl(var(--champagne));
   }
   .border-gold {
-    border-color: hsl(var(--gold-light));
+    border-color: hsl(var(--teal-light));
   }
   .divider-gold {
     @apply w-16 h-px mx-auto;
-    background: linear-gradient(90deg, transparent, hsl(var(--gold)), transparent);
+    background: linear-gradient(90deg, transparent, hsl(var(--teal)), transparent);
   }
 
   @keyframes ticker {
@@ -122,5 +122,13 @@
   }
   .animate-pulse-whatsapp {
     animation: pulse-whatsapp 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    50% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+  }
+  .animate-pulse-green {
+    animation: pulse-green 2s ease-in-out infinite;
   }
 }
