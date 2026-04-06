@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import whatsapp1 from "@/assets/whatsapp-1.jpg";
-import whatsapp2 from "@/assets/whatsapp-2.jpg";
-import whatsapp3 from "@/assets/whatsapp-3.jpg";
-import whatsapp4 from "@/assets/whatsapp-4.jpg";
+import whatsapp1 from "@/assets/whatsapp-1.webp";
+import whatsapp2 from "@/assets/whatsapp-2.webp";
+import whatsapp3 from "@/assets/whatsapp-3.webp";
+import whatsapp4 from "@/assets/whatsapp-4.webp";
 
 const testimonials = [
   { image: whatsapp2, name: "زبونة", city: "فاس", quote: "نتيجة زوينة — هاني صورت ليك قبل وبعد" },
