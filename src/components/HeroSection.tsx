@@ -118,8 +118,8 @@ const HeroSection = () => {
             fetchPriority="high"
             loading="eager"
             decoding="auto"
-            width={640}
-            height={853}
+            width={480}
+            height={362}
             style={{ width: "100%", height: "auto", display: "block" }}
           />
           {/* TODO: add doctor video src */}
