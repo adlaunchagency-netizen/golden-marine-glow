@@ -46,7 +46,18 @@
     <meta name="twitter:card" content="summary_large_image">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Inline shell for instant FCP — React replaces this on mount -->
+      <div style="background:#F8FAFB">
+        <div class="shell-hero">
+          <div class="shell-stars"><span style="color:#F59E0B;font-size:14px;letter-spacing:1px">★★★★★</span> 4.9/5 (892 تقييم)</div>
+          <h1 class="shell-h1">الحل النهائي لتساقط الشعر بعد الولادة<br><span>استرجعي كثافة شعرك في 15 يوماً</span></h1>
+          <p class="shell-sub">مكمل غذائي طبيعي من الكولاجين البحري — <strong style="color:#1E293B">مُصاغ خصيصاً للأمهات بعد الولادة</strong></p>
+          <button class="shell-cta">🛒 اطلبي الآن — الدفع عند الاستلام</button>
+        </div>
+        <img src="/hero-doctor.webp" alt="" width="640" height="482" style="width:100%;height:auto;display:block" fetchpriority="high" />
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
 
     <!-- Defer ALL third-party scripts until after page renders -->
