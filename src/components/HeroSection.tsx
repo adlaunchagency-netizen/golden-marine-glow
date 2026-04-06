@@ -120,7 +120,7 @@ const HeroSection = () => {
             decoding="auto"
             width={640}
             height={853}
-            style={{ width: "100%", height: "auto", maxHeight: 420, objectFit: "cover", objectPosition: "center 20%", display: "block" }}
+            style={{ width: "100%", height: "auto", display: "block" }}
           />
           {/* TODO: add doctor video src */}
           {/* <video autoPlay muted loop playsInline src="" style={{ width: "100%", borderRadius: 12 }} /> */}
