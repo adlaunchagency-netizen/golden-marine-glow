@@ -112,14 +112,14 @@ const HeroSection = () => {
         <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 0 }}>
           <img
             src="/hero-doctor.webp"
-            srcSet="/hero-doctor.webp 640w, /hero-doctor-lg.webp 960w"
+            srcSet="/hero-doctor.webp 480w, /hero-doctor-lg.webp 720w"
             sizes="(min-width: 768px) 50vw, 100vw"
             alt="صيدلانية تعرض كولاجين بارافيتا البحري"
             fetchPriority="high"
             loading="eager"
             decoding="auto"
-            width={640}
-            height={853}
+            width={480}
+            height={362}
             style={{ width: "100%", height: "auto", display: "block" }}
           />
           {/* TODO: add doctor video src */}
