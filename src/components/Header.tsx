@@ -52,7 +52,7 @@ const Header = () => {
 
           {/* WhatsApp icon - always visible */}
           <a
-            href="https://wa.me/212600000000"
+            href="https://wa.me/212709132421?text=Salam,%20bghit%20nsewwel%203la%20Collagen%20Marin"
             target="_blank"
             rel="noopener noreferrer"
             className="animate-pulse-green rounded-full flex items-center justify-center"
