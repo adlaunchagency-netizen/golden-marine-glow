@@ -23,8 +23,8 @@ const citySecteurs: Record<string, string[]> = {
 
 const offers = [
   { label: "عبوة واحدة — 199 درهم", value: "1-box-199", price: 199 },
-  { label: "3 علب + سيروم — 299 درهم ⭐ الأكثر مبيعاً", value: "3-boxes-299", price: 299, recommended: true },
-  { label: "4 علب + 2 سيروم — 399 درهم 💎 الأفضل قيمة", value: "4-boxes-399", price: 399 },
+  { label: "باك الأمومة 3 علب + سيروم — 299 درهم ⭐", value: "3-boxes-299", price: 299, recommended: true },
+  { label: "باك المكثف 4 علب + سيرومين — 399 درهم 💎", value: "4-boxes-399", price: 399 },
 ];
 
 const offerPriceMap: Record<string, number> = {
@@ -61,7 +61,6 @@ const OrderForm = () => {
     return () => window.removeEventListener("select-offer", handler);
   }, []);
 
-  // Sort cities: pinned first, then rest alphabetically
   const allCityNames = dbCities.map((c) => c.city_name);
   const pinned = allCityNames.filter((c) => pinnedCityNames.includes(c));
   const rest = allCityNames.filter((c) => !pinnedCityNames.includes(c));
@@ -127,16 +126,17 @@ const OrderForm = () => {
 
   if (success) {
     return (
-      <section id="order" className="py-20 md:py-28 bg-dark-bg">
+      <section id="order" style={{ background: "#1E293B", padding: "60px 0" }}>
         <div className="container max-w-lg">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center bg-gold/10 border border-gold/30 rounded-2xl p-8 md:p-12"
+            className="text-center rounded-2xl p-8 md:p-12"
+            style={{ background: "rgba(13,148,136,0.1)", border: "1px solid rgba(13,148,136,0.3)" }}
           >
             <div className="text-5xl mb-4">✅</div>
-            <h3 className="font-body text-2xl font-bold text-champagne mb-3">تم استلام طلبك بنجاح!</h3>
-            <p className="font-body text-gold-light/70">غادي نتواصلو معاك قريباً لتأكيد الطلب 📞</p>
+            <h3 className="font-body text-2xl font-bold mb-3" style={{ color: "#F1F5F9" }}>تم استلام طلبك بنجاح!</h3>
+            <p className="font-body" style={{ color: "rgba(255,255,255,0.6)" }}>غادي نتواصلو معاك قريباً لتأكيد الطلب 📞</p>
           </motion.div>
         </div>
       </section>
@@ -144,7 +144,7 @@ const OrderForm = () => {
   }
 
   return (
-    <section id="order-form" className="py-20 md:py-28 bg-dark-bg">
+    <section id="order-form" style={{ background: "#1E293B", padding: "60px 0" }}>
       <div className="container max-w-lg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -152,10 +152,10 @@ const OrderForm = () => {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="font-body text-3xl md:text-4xl font-bold text-champagne mb-3">
+          <h2 className="font-body text-3xl md:text-4xl font-bold mb-3" style={{ color: "#F1F5F9" }}>
             اطلبي <span className="text-gold-gradient">الآن</span>
           </h2>
-          <p className="font-body text-gold-light/60">عمري الفورم وغادي نتصلو بيك لتأكيد الطلب</p>
+          <p className="font-body" style={{ color: "rgba(255,255,255,0.5)" }}>عمري الفورم وغادي نتصلو بيك لتأكيد الطلب</p>
         </motion.div>
 
         <motion.form
@@ -164,69 +164,74 @@ const OrderForm = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
           onSubmit={handleSubmit}
-          className="bg-gold/5 border border-gold/20 rounded-2xl p-6 md:p-8 space-y-5"
+          className="rounded-2xl p-6 md:p-8 space-y-5"
+          style={{ background: "rgba(13,148,136,0.05)", border: "1px solid rgba(13,148,136,0.2)" }}
         >
           {/* Name */}
           <div>
-            <label className="block font-body text-sm font-medium text-champagne mb-2">الاسم الكامل *</label>
+            <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>الاسم الكامل *</label>
             <input
               type="text"
               value={form.customer_name}
               onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
               placeholder="مثال: فاطمة الزهراء"
-              className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body placeholder:text-gold-light/30 focus:outline-none focus:border-gold transition-colors"
+              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors"
+              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
             />
           </div>
 
           {/* Phone */}
           <div>
-            <label className="block font-body text-sm font-medium text-champagne mb-2">رقم الهاتف *</label>
+            <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>رقم الهاتف *</label>
             <input
               type="tel"
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
               placeholder="06XXXXXXXX"
               dir="ltr"
-              className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body placeholder:text-gold-light/30 focus:outline-none focus:border-gold transition-colors text-left"
+              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors text-left"
+              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
             />
           </div>
 
           {/* City - Searchable Dropdown */}
           <div ref={cityRef} className="relative">
-            <label className="block font-body text-sm font-medium text-champagne mb-2">المدينة *</label>
+            <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>المدينة *</label>
             <button
               type="button"
               onClick={() => { setCityOpen(!cityOpen); setCitySearch(""); }}
-              className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body focus:outline-none focus:border-gold transition-colors flex items-center justify-between"
+              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors flex items-center justify-between"
+              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
             >
-              <span className={form.city ? "text-champagne" : "text-gold-light/30"}>
+              <span style={{ color: form.city ? "#F1F5F9" : "rgba(255,255,255,0.3)" }}>
                 {form.city || "اختاري المدينة"}
               </span>
-              <ChevronDown className={`w-4 h-4 text-gold-light/50 transition-transform ${cityOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-4 h-4 transition-transform ${cityOpen ? "rotate-180" : ""}`} style={{ color: "rgba(255,255,255,0.4)" }} />
             </button>
 
             {cityOpen && (
-              <div className="absolute z-50 top-full mt-1 w-full bg-dark-bg border border-gold/30 rounded-xl overflow-hidden shadow-lg max-h-[400px]">
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-gold/20">
-                  <Search className="w-4 h-4 text-gold-light/40 shrink-0" />
+              <div className="absolute z-50 top-full mt-1 w-full rounded-xl overflow-hidden shadow-lg max-h-[400px]" style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)" }}>
+                <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: "1px solid rgba(13,148,136,0.2)" }}>
+                  <Search className="w-4 h-4 shrink-0" style={{ color: "rgba(255,255,255,0.3)" }} />
                   <input
                     type="text"
                     value={citySearch}
                     onChange={(e) => setCitySearch(e.target.value)}
                     placeholder="ابحثي عن مدينتك..."
                     autoFocus
-                    className="w-full bg-transparent text-champagne font-body text-sm placeholder:text-gold-light/30 focus:outline-none"
+                    className="w-full bg-transparent font-body text-sm focus:outline-none"
+                    style={{ color: "#F1F5F9" }}
                   />
                 </div>
                 <ul className="overflow-y-auto max-h-[340px]">
                   {citiesLoading ? (
-                    <li className="px-4 py-3 text-sm text-gold-light/40 font-body flex items-center gap-2 justify-center">
+                    <li className="px-4 py-3 text-sm font-body flex items-center gap-2 justify-center" style={{ color: "rgba(255,255,255,0.4)" }}>
                       <Loader2 className="w-4 h-4 animate-spin" /> جاري تحميل المدن...
                     </li>
                   ) : citiesError ? (
                     <li className="px-4 py-3 text-sm text-red-400 font-body text-center">{citiesError}</li>
                   ) : filteredCities.length === 0 ? (
-                    <li className="px-4 py-3 text-sm text-gold-light/40 font-body">لا توجد نتائج</li>
+                    <li className="px-4 py-3 text-sm font-body" style={{ color: "rgba(255,255,255,0.4)" }}>لا توجد نتائج</li>
                   ) : (
                     <>
                       {filteredCities.filter((c) => pinnedCityNames.includes(c)).map((c) => (
@@ -238,18 +243,18 @@ const OrderForm = () => {
                               setCityOpen(false);
                               setCitySearch("");
                             }}
-                            className={`w-full text-right px-4 min-h-[44px] flex items-center text-sm font-body font-medium transition-colors ${
-                              form.city === c
-                                ? "bg-gold/20 text-gold-light"
-                                : "text-champagne hover:bg-gold/10"
-                            }`}
+                            className="w-full text-right px-4 min-h-[44px] flex items-center text-sm font-body font-medium transition-colors"
+                            style={{
+                              background: form.city === c ? "rgba(13,148,136,0.2)" : "transparent",
+                              color: form.city === c ? "#14B8A6" : "#F1F5F9",
+                            }}
                           >
                             {c}
                           </button>
                         </li>
                       ))}
                       {!citySearch && filteredCities.some((c) => !pinnedCityNames.includes(c)) && (
-                        <li className="px-4 py-2 text-xs text-gold-light/40 font-body border-t border-b border-gold/10 bg-gold/5 text-center select-none">
+                        <li className="px-4 py-2 text-xs font-body text-center select-none" style={{ color: "rgba(255,255,255,0.3)", borderTop: "1px solid rgba(13,148,136,0.1)", borderBottom: "1px solid rgba(13,148,136,0.1)", background: "rgba(13,148,136,0.05)" }}>
                           --- المزيد (بحث) ---
                         </li>
                       )}
@@ -262,11 +267,11 @@ const OrderForm = () => {
                               setCityOpen(false);
                               setCitySearch("");
                             }}
-                            className={`w-full text-right px-4 min-h-[44px] flex items-center text-sm font-body transition-colors ${
-                              form.city === c
-                                ? "bg-gold/20 text-gold-light"
-                                : "text-champagne/80 hover:bg-gold/10"
-                            }`}
+                            className="w-full text-right px-4 min-h-[44px] flex items-center text-sm font-body transition-colors"
+                            style={{
+                              background: form.city === c ? "rgba(13,148,136,0.2)" : "transparent",
+                              color: form.city === c ? "#14B8A6" : "rgba(255,255,255,0.7)",
+                            }}
                           >
                             {c}
                           </button>
@@ -282,11 +287,12 @@ const OrderForm = () => {
           {/* Secteur - dependent dropdown */}
           {hasSecteurs && (
             <div>
-              <label className="block font-body text-sm font-medium text-champagne mb-2">المنطقة / Secteur</label>
+              <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>المنطقة / Secteur</label>
               <select
                 value={form.secteur}
                 onChange={(e) => setForm({ ...form, secteur: e.target.value })}
-                className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body focus:outline-none focus:border-gold transition-colors appearance-none"
+                className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors appearance-none"
+                style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
               >
                 <option value="">اختاري المنطقة</option>
                 {availableSecteurs.map((s) => (
@@ -298,11 +304,12 @@ const OrderForm = () => {
 
           {/* Offer */}
           <div>
-            <label className="block font-body text-sm font-medium text-champagne mb-2">العرض</label>
+            <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>العرض</label>
             <select
               value={form.offer}
               onChange={(e) => setForm({ ...form, offer: e.target.value })}
-              className="w-full bg-dark-bg border border-gold/30 rounded-xl px-4 py-3 min-h-[56px] text-champagne font-body focus:outline-none focus:border-gold transition-colors appearance-none"
+              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors appearance-none"
+              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
             >
               {offers.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -317,13 +324,14 @@ const OrderForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gold-gradient text-dark-bg font-body text-lg font-bold py-4 rounded-xl min-h-[56px] hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="w-full font-body text-lg font-bold py-4 rounded-xl min-h-[56px] transition-opacity disabled:opacity-50"
+            style={{ background: "#0D9488", color: "#fff", border: "none" }}
           >
-            {loading ? "جاري الإرسال..." : "أكدي الطلب 🛒"}
+            {loading ? "⏳ جاري تأكيد طلبك..." : "أطلب الآن — الدفع عند الاستلام 🛒"}
           </button>
 
-          <p className="text-center text-xs text-gold-light/50">
-            🚚 توصيل مجاني | 💳 الدفع عند الاستلام | 🌿 100% طبيعي
+          <p className="text-center text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
+            توصيل مجاني في 24–48 ساعة | الدفع عند الاستلام
           </p>
         </motion.form>
       </div>
