@@ -119,8 +119,8 @@ const HeroSection = () => {
             loading="eager"
             decoding="auto"
             width={480}
-            height={362}
-            style={{ width: "100%", height: "auto", display: "block" }}
+            height={480}
+            style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }}
           />
           {/* TODO: add doctor video src */}
           {/* <video autoPlay muted loop playsInline src="" style={{ width: "100%", borderRadius: 12 }} /> */}
