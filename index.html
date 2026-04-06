@@ -46,13 +46,7 @@
     <!-- Defer ALL third-party scripts until after page renders -->
     <script>
     window.addEventListener('load', function() {
-      setTimeout(function() {
-        // Load Google Fonts after paint
-        var fl = document.createElement('link');
-        fl.rel = 'stylesheet';
-        fl.href = 'https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap';
-        document.head.appendChild(fl);
-      }, 50);
+      // Font is now preloaded in <head> — no JS needed
 
       // Delay tracking scripts further to not compete with interactive content
       setTimeout(function() {
