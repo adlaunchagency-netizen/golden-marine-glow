@@ -4,8 +4,6 @@ import HeroSection from "@/components/HeroSection";
 
 const ScienceSection = lazy(() => import("@/components/ScienceSection"));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
-const HeroTestimonialCarousel = lazy(() => import("@/components/HeroTestimonialCarousel"));
-const TestimonialTicker = lazy(() => import("@/components/TestimonialTicker"));
 const BenefitsSection = lazy(() => import("@/components/BenefitsSection"));
 const OfferSection = lazy(() => import("@/components/OfferSection"));
 const FaqSection = lazy(() => import("@/components/FaqSection"));
@@ -37,11 +35,7 @@ const Index = () => {
     const offerValue = valueMap[qty] || "1-box-199";
     window.dispatchEvent(new CustomEvent("select-offer", { detail: offerValue }));
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "AddToCart", {
-        content_name: "Paravita Neo Collagen",
-        value: price,
-        currency: "MAD",
-      });
+      window.fbq("track", "AddToCart", { content_name: "Paravita Neo Collagen", value: price, currency: "MAD" });
     }
     document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -52,8 +46,6 @@ const Index = () => {
       <HeroSection />
       <Suspense fallback={null}><ScienceSection /></Suspense>
       <Suspense fallback={null}><TestimonialsSection /></Suspense>
-      <Suspense fallback={null}><HeroTestimonialCarousel /></Suspense>
-      <Suspense fallback={null}><TestimonialTicker /></Suspense>
       <Suspense fallback={null}><BenefitsSection /></Suspense>
       <Suspense fallback={null}><OfferSection onSelectOffer={handleSelectOffer} /></Suspense>
       <Suspense fallback={null}><OrderForm /></Suspense>

@@ -115,7 +115,7 @@ const HeroSection = () => {
             alt="صيدلانية تعرض كولاجين بارافيتا البحري"
             fetchPriority="high"
             loading="eager"
-            decoding="async"
+            decoding="auto"
             width={480}
             height={640}
             style={{ width: "100%", height: "auto", maxHeight: 420, objectFit: "cover", objectPosition: "center 20%", display: "block" }}
