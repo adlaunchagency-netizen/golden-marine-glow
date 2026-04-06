@@ -1,28 +1,16 @@
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
+const ChevronSvg = ({ style }: { style?: React.CSSProperties }) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={style} className="shrink-0 ml-3 transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+);
+
 const faqs = [
-  {
-    q: "هل المنتج آمن أثناء الرضاعة الطبيعية؟",
-    a: "نعم، تركيبة بارافيتا خالية من المواد الضارة وآمنة للمرضعات. ننصح باستشارة طبيبك في حال وجود حالة طبية خاصة.",
-  },
-  {
-    q: "في كم من الوقت تظهر النتائج؟",
-    a: "تلاحظ أغلب العملاء فرقاً واضحاً خلال 15–30 يوماً من الاستخدام اليومي المنتظم.",
-  },
-  {
-    q: "ما الفرق بين الكولاجين العادي وكولاجين بارافيتا؟",
-    a: "بارافيتا يعتمد على ببتيدات صغيرة (أقل من 1000 Da) تُمتص بنسبة 95% مقارنة بالكولاجين العادي الذي يُمتص بنسبة منخفضة.",
-  },
-  {
-    q: "كيف يتم التوصيل والدفع؟",
-    a: "التوصيل لجميع مدن المغرب في 24–48 ساعة. الدفع عند الاستلام فقط — لا حاجة لبطاقة بنكية.",
-  },
-  {
-    q: "ماذا لو لم يعجبني المنتج؟",
-    a: "نضمن استرداد المال الكامل خلال 30 يوماً إذا لم تلاحظي أي فرق.",
-  },
+  { q: "هل المنتج آمن أثناء الرضاعة الطبيعية؟", a: "نعم، تركيبة بارافيتا خالية من المواد الضارة وآمنة للمرضعات. ننصح باستشارة طبيبك في حال وجود حالة طبية خاصة." },
+  { q: "في كم من الوقت تظهر النتائج؟", a: "تلاحظ أغلب العملاء فرقاً واضحاً خلال 15–30 يوماً من الاستخدام اليومي المنتظم." },
+  { q: "ما الفرق بين الكولاجين العادي وكولاجين بارافيتا؟", a: "بارافيتا يعتمد على ببتيدات صغيرة (أقل من 1000 Da) تُمتص بنسبة 95% مقارنة بالكولاجين العادي الذي يُمتص بنسبة منخفضة." },
+  { q: "كيف يتم التوصيل والدفع؟", a: "التوصيل لجميع مدن المغرب في 24–48 ساعة. الدفع عند الاستلام فقط — لا حاجة لبطاقة بنكية." },
+  { q: "ماذا لو لم يعجبني المنتج؟", a: "نضمن استرداد المال الكامل خلال 30 يوماً إذا لم تلاحظي أي فرق." },
 ];
 
 const FaqSection = () => {
@@ -50,19 +38,13 @@ const FaqSection = () => {
                     className="w-full flex items-center justify-between p-5 text-right font-body font-semibold text-foreground hover:bg-accent/30 transition-colors"
                   >
                     <span>{faq.q}</span>
-                    <ChevronDown
-                      className="shrink-0 ml-3 transition-transform duration-200"
-                      style={{ color: "#0D9488", transform: isOpen ? "rotate(180deg)" : "rotate(0)" }}
-                      size={20}
-                    />
+                    <ChevronSvg style={{ color: "#0D9488", transform: isOpen ? "rotate(180deg)" : "rotate(0)" }} />
                   </button>
                   <div
                     className="overflow-hidden transition-all duration-300"
                     style={{ maxHeight: isOpen ? "200px" : "0", opacity: isOpen ? 1 : 0 }}
                   >
-                    <p className="px-5 pb-5 font-body text-sm text-muted-foreground leading-relaxed">
-                      {faq.a}
-                    </p>
+                    <p className="px-5 pb-5 font-body text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
                   </div>
                 </div>
               </AnimatedSection>

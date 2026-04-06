@@ -1,8 +1,16 @@
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import { ChevronDown, Search, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useCities } from "@/hooks/useCities";
+
+const ChevronSvg = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
+  <svg className={className} style={style} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+);
+const SearchSvg = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
+  <svg className={className} style={style} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+);
+const LoaderSvg = ({ className }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+);
 
 const pinnedCityNames = [
   "Casablanca", "Fes", "Marrakech", "Tanger", "Agadir", "Meknes", "Rabat", "Oujda", "Sale", "Kenitra",
@@ -128,16 +136,14 @@ const OrderForm = () => {
     return (
       <section id="order" style={{ background: "#1E293B", padding: "60px 0" }}>
         <div className="container max-w-lg">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center rounded-2xl p-8 md:p-12"
+          <div
+            className="text-center rounded-2xl p-8 md:p-12 fade-in visible"
             style={{ background: "rgba(13,148,136,0.1)", border: "1px solid rgba(13,148,136,0.3)" }}
           >
             <div className="text-5xl mb-4">✅</div>
             <h3 className="font-body text-2xl font-bold mb-3" style={{ color: "#F1F5F9" }}>تم استلام طلبك بنجاح!</h3>
             <p className="font-body" style={{ color: "rgba(255,255,255,0.6)" }}>غادي نتواصلو معاك قريباً لتأكيد الطلب 📞</p>
-          </motion.div>
+          </div>
         </div>
       </section>
     );
@@ -146,23 +152,14 @@ const OrderForm = () => {
   return (
     <section id="order-form" style={{ background: "#1E293B", padding: "60px 0" }}>
       <div className="container max-w-lg">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
+        <div className="text-center mb-10">
           <h2 className="font-body text-3xl md:text-4xl font-bold mb-3" style={{ color: "#F1F5F9" }}>
             اطلبي <span className="text-gold-gradient">الآن</span>
           </h2>
           <p className="font-body" style={{ color: "rgba(255,255,255,0.5)" }}>عمري الفورم وغادي نتصلو بيك لتأكيد الطلب</p>
-        </motion.div>
+        </div>
 
-        <motion.form
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+        <form
           onSubmit={handleSubmit}
           className="rounded-2xl p-6 md:p-8 space-y-5"
           style={{ background: "rgba(13,148,136,0.05)", border: "1px solid rgba(13,148,136,0.2)" }}
@@ -206,13 +203,13 @@ const OrderForm = () => {
               <span style={{ color: form.city ? "#F1F5F9" : "rgba(255,255,255,0.3)" }}>
                 {form.city || "اختاري المدينة"}
               </span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${cityOpen ? "rotate-180" : ""}`} style={{ color: "rgba(255,255,255,0.4)" }} />
+              <ChevronSvg className={`transition-transform ${cityOpen ? "rotate-180" : ""}`} style={{ color: "rgba(255,255,255,0.4)" }} />
             </button>
 
             {cityOpen && (
               <div className="absolute z-50 top-full mt-1 w-full rounded-xl overflow-hidden shadow-lg max-h-[400px]" style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)" }}>
                 <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: "1px solid rgba(13,148,136,0.2)" }}>
-                  <Search className="w-4 h-4 shrink-0" style={{ color: "rgba(255,255,255,0.3)" }} />
+                  <SearchSvg className="shrink-0" style={{ color: "rgba(255,255,255,0.3)" }} />
                   <input
                     type="text"
                     value={citySearch}
@@ -226,7 +223,7 @@ const OrderForm = () => {
                 <ul className="overflow-y-auto max-h-[340px]">
                   {citiesLoading ? (
                     <li className="px-4 py-3 text-sm font-body flex items-center gap-2 justify-center" style={{ color: "rgba(255,255,255,0.4)" }}>
-                      <Loader2 className="w-4 h-4 animate-spin" /> جاري تحميل المدن...
+                      <LoaderSvg className="w-4 h-4 animate-spin" /> جاري تحميل المدن...
                     </li>
                   ) : citiesError ? (
                     <li className="px-4 py-3 text-sm text-red-400 font-body text-center">{citiesError}</li>
@@ -333,7 +330,7 @@ const OrderForm = () => {
           <p className="text-center text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
             توصيل مجاني في 24–48 ساعة | الدفع عند الاستلام
           </p>
-        </motion.form>
+        </form>
       </div>
     </section>
   );
