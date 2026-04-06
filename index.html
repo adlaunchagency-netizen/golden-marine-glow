@@ -28,6 +28,12 @@
       *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
       body{font-family:'Almarai',system-ui,-apple-system,sans-serif;background:#F8FAFB;color:#1E293B;direction:rtl;-webkit-font-smoothing:antialiased}
       #root{min-height:100vh}
+      .shell-hero{padding:28px 20px 24px}
+      .shell-stars{display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:#64748B}
+      .shell-h1{font-size:22px;font-weight:800;color:#1E293B;line-height:1.45;margin-bottom:14px}
+      .shell-h1 span{color:#0D9488;border-bottom:2.5px solid #0D9488;padding-bottom:1px}
+      .shell-sub{font-size:14px;color:#64748B;line-height:1.6;margin-bottom:16px}
+      .shell-cta{width:100%;background:#0D9488;color:#fff;border:none;border-radius:50px;padding:17px 24px;font-size:17px;font-weight:800;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 28px rgba(13,148,136,0.35);margin-bottom:12px}
     </style>
 
     <!-- OG tags -->
@@ -40,7 +46,18 @@
     <meta name="twitter:card" content="summary_large_image">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Inline shell for instant FCP — React replaces this on mount -->
+      <div style="background:#F8FAFB">
+        <div class="shell-hero">
+          <div class="shell-stars"><span style="color:#F59E0B;font-size:14px;letter-spacing:1px">★★★★★</span> 4.9/5 (892 تقييم)</div>
+          <h1 class="shell-h1">الحل النهائي لتساقط الشعر بعد الولادة<br><span>استرجعي كثافة شعرك في 15 يوماً</span></h1>
+          <p class="shell-sub">مكمل غذائي طبيعي من الكولاجين البحري — <strong style="color:#1E293B">مُصاغ خصيصاً للأمهات بعد الولادة</strong></p>
+          <button class="shell-cta">🛒 اطلبي الآن — الدفع عند الاستلام</button>
+        </div>
+        <img src="/hero-doctor.webp" alt="" width="640" height="482" style="width:100%;height:auto;display:block" fetchpriority="high" />
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
 
     <!-- Defer ALL third-party scripts until after page renders -->
