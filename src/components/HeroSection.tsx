@@ -109,7 +109,7 @@ const HeroSection = () => {
         </div>
 
         {/* Right column — image + video placeholder */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 0 }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 0, overflow: "visible" }}>
           <img
             src="/hero-doctor.webp"
             srcSet="/hero-doctor.webp 480w, /hero-doctor-lg.webp 720w"
@@ -119,11 +119,9 @@ const HeroSection = () => {
             loading="eager"
             decoding="auto"
             width={480}
-            height={480}
-            style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }}
+            height={560}
+            style={{ width: "100%", height: "auto", display: "block", objectFit: "cover", objectPosition: "center 15%", minHeight: 420 }}
           />
-          {/* TODO: add doctor video src */}
-          {/* <video autoPlay muted loop playsInline src="" style={{ width: "100%", borderRadius: 12 }} /> */}
         </div>
       </div>
     </section>
