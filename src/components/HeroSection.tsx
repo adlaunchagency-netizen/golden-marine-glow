@@ -118,8 +118,8 @@ const HeroSection = () => {
             fetchPriority="high"
             loading="eager"
             decoding="auto"
-            width={480}
-            height={560}
+            width={512}
+            height={640}
             style={{ width: "100%", display: "block", objectFit: "contain", height: "auto" }}
           />
         </div>
