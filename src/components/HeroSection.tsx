@@ -112,8 +112,6 @@ const HeroSection = () => {
         <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 0, overflow: "visible" }}>
           <img
             src="/hero-doctor.webp"
-            srcSet="/hero-doctor.webp 480w, /hero-doctor-lg.webp 720w"
-            sizes="(min-width: 768px) 50vw, 100vw"
             alt="صيدلانية تعرض كولاجين بارافيتا البحري"
             fetchPriority="high"
             loading="eager"
