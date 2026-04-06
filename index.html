@@ -13,11 +13,15 @@
     <!-- Preload hero image for fast LCP -->
     <link rel="preload" as="image" type="image/webp" href="/hero-doctor.webp" imagesrcset="/hero-doctor.webp 640w, /hero-doctor-lg.webp 960w" imagesizes="(min-width: 768px) 50vw, 100vw" fetchpriority="high" />
 
+    <!-- Preload critical font for fast text render -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" media="print" onload="this.media='all'" />
+
     <!-- DNS prefetch for deferred third-party origins -->
     <link rel="dns-prefetch" href="https://connect.facebook.net" />
     <link rel="dns-prefetch" href="https://www.clarity.ms" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Inline critical CSS for instant FCP -->
     <style>
