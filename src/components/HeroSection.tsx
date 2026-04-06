@@ -120,7 +120,7 @@ const HeroSection = () => {
             decoding="auto"
             width={480}
             height={560}
-            style={{ width: "100%", display: "block", objectFit: "cover", objectPosition: "center 40%", height: 520 }}
+            style={{ width: "100%", display: "block", objectFit: "contain", height: "auto" }}
           />
         </div>
       </div>
