@@ -194,44 +194,53 @@ const OrderForm = () => {
           {/* Name */}
           <div>
             <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>الاسم الكامل *</label>
-            <input
-              type="text"
-              value={form.customer_name}
-              onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
-              placeholder="مثال: فاطمة الزهراء"
-              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors"
-              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={form.customer_name}
+                onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
+                onBlur={() => markTouched("customer_name")}
+                placeholder="مثال: فاطمة الزهراء"
+                className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors"
+                style={{ background: "#0F172A", border: `1px solid ${fieldErrors.customer_name ? "#EF4444" : touched.customer_name && isNameValid ? "#22C55E" : "rgba(13,148,136,0.3)"}`, color: "#F1F5F9" }}
+              />
+              {touched.customer_name && isNameValid && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#22C55E", fontSize: 18 }}>✓</span>}
+            </div>
+            {fieldErrors.customer_name && <p className="font-body text-xs mt-1.5" style={{ color: "#EF4444" }}>{fieldErrors.customer_name}</p>}
           </div>
 
           {/* Phone */}
           <div>
             <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>رقم الهاتف *</label>
-            <input
-              type="tel"
-              value={form.phone}
-              onChange={(e) => {
-                const val = e.target.value;
-                setForm((prev) => {
-                  const next = { ...prev, phone: val };
-                  // Auto-detect city from phone prefix (only if city not yet chosen)
-                  if (!prev.city) {
-                    const clean = val.replace(/\s/g, "");
-                    const prefix3 = clean.startsWith("+212") ? "0" + clean.slice(4, 6) : clean.slice(0, 3);
-                    const detected = phonePrefixCityMap[prefix3];
-                    if (detected && allCityNames.includes(detected)) {
-                      next.city = detected;
-                      next.secteur = "";
+            <div className="relative">
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setForm((prev) => {
+                    const next = { ...prev, phone: val };
+                    if (!prev.city) {
+                      const clean = val.replace(/\s/g, "");
+                      const prefix3 = clean.startsWith("+212") ? "0" + clean.slice(4, 6) : clean.slice(0, 3);
+                      const detected = phonePrefixCityMap[prefix3];
+                      if (detected && allCityNames.includes(detected)) {
+                        next.city = detected;
+                        next.secteur = "";
+                      }
                     }
-                  }
-                  return next;
-                });
-              }}
-              placeholder="06XXXXXXXX"
-              dir="ltr"
-              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors text-left"
-              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
-            />
+                    return next;
+                  });
+                }}
+                onBlur={() => markTouched("phone")}
+                placeholder="06XXXXXXXX"
+                dir="ltr"
+                className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors text-left"
+                style={{ background: "#0F172A", border: `1px solid ${fieldErrors.phone ? "#EF4444" : touched.phone && isPhoneValid ? "#22C55E" : "rgba(13,148,136,0.3)"}`, color: "#F1F5F9" }}
+              />
+              {touched.phone && isPhoneValid && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#22C55E", fontSize: 18 }}>✓</span>}
+            </div>
+            {fieldErrors.phone && <p className="font-body text-xs mt-1.5" style={{ color: "#EF4444" }}>{fieldErrors.phone}</p>}
           </div>
 
           {/* City - Searchable Dropdown */}
