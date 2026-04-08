@@ -69,6 +69,20 @@ const OrderForm = () => {
   const cityRef = useRef<HTMLDivElement>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const markTouched = (field: string) => setTouched((prev) => ({ ...prev, [field]: true }));
+
+  const isPhoneValid = /^(0[5-7]\d{8}|\+212[5-7]\d{8})$/.test(form.phone.replace(/\s/g, ""));
+  const isNameValid = form.customer_name.trim().length >= 3;
+  const isCityValid = !!form.city;
+
+  const fieldErrors: Record<string, string> = {};
+  if (touched.customer_name && !form.customer_name.trim()) fieldErrors.customer_name = "المرجو إدخال الاسم الكامل";
+  else if (touched.customer_name && !isNameValid) fieldErrors.customer_name = "الاسم قصير بزاف — 3 حروف على الأقل";
+  if (touched.phone && !form.phone.trim()) fieldErrors.phone = "المرجو إدخال رقم الهاتف";
+  else if (touched.phone && form.phone.trim() && !isPhoneValid) fieldErrors.phone = "رقم الهاتف غير صحيح — مثال: 0612345678";
+  if (touched.city && !isCityValid) fieldErrors.city = "المرجو اختيار المدينة";
 
   const hasSecteurs = form.city && citySecteurs[form.city];
   const availableSecteurs = hasSecteurs ? citySecteurs[form.city] : [];
