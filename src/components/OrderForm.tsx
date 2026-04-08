@@ -69,6 +69,20 @@ const OrderForm = () => {
   const cityRef = useRef<HTMLDivElement>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const markTouched = (field: string) => setTouched((prev) => ({ ...prev, [field]: true }));
+
+  const isPhoneValid = /^(0[5-7]\d{8}|\+212[5-7]\d{8})$/.test(form.phone.replace(/\s/g, ""));
+  const isNameValid = form.customer_name.trim().length >= 3;
+  const isCityValid = !!form.city;
+
+  const fieldErrors: Record<string, string> = {};
+  if (touched.customer_name && !form.customer_name.trim()) fieldErrors.customer_name = "المرجو إدخال الاسم الكامل";
+  else if (touched.customer_name && !isNameValid) fieldErrors.customer_name = "الاسم قصير بزاف — 3 حروف على الأقل";
+  if (touched.phone && !form.phone.trim()) fieldErrors.phone = "المرجو إدخال رقم الهاتف";
+  else if (touched.phone && form.phone.trim() && !isPhoneValid) fieldErrors.phone = "رقم الهاتف غير صحيح — مثال: 0612345678";
+  if (touched.city && !isCityValid) fieldErrors.city = "المرجو اختيار المدينة";
 
   const hasSecteurs = form.city && citySecteurs[form.city];
   const availableSecteurs = hasSecteurs ? citySecteurs[form.city] : [];
@@ -103,7 +117,7 @@ const OrderForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setTouched({ customer_name: true, phone: true, city: true });
 
     if (!form.customer_name.trim() || !form.phone.trim() || !form.city) {
       setError("المرجو ملء جميع الحقول المطلوبة");
@@ -180,60 +194,73 @@ const OrderForm = () => {
           {/* Name */}
           <div>
             <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>الاسم الكامل *</label>
-            <input
-              type="text"
-              value={form.customer_name}
-              onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
-              placeholder="مثال: فاطمة الزهراء"
-              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors"
-              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={form.customer_name}
+                onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
+                onBlur={() => markTouched("customer_name")}
+                placeholder="مثال: فاطمة الزهراء"
+                className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors"
+                style={{ background: "#0F172A", border: `1px solid ${fieldErrors.customer_name ? "#EF4444" : touched.customer_name && isNameValid ? "#22C55E" : "rgba(13,148,136,0.3)"}`, color: "#F1F5F9" }}
+              />
+              {touched.customer_name && isNameValid && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#22C55E", fontSize: 18 }}>✓</span>}
+            </div>
+            {fieldErrors.customer_name && <p className="font-body text-xs mt-1.5" style={{ color: "#EF4444" }}>{fieldErrors.customer_name}</p>}
           </div>
 
           {/* Phone */}
           <div>
             <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>رقم الهاتف *</label>
-            <input
-              type="tel"
-              value={form.phone}
-              onChange={(e) => {
-                const val = e.target.value;
-                setForm((prev) => {
-                  const next = { ...prev, phone: val };
-                  // Auto-detect city from phone prefix (only if city not yet chosen)
-                  if (!prev.city) {
-                    const clean = val.replace(/\s/g, "");
-                    const prefix3 = clean.startsWith("+212") ? "0" + clean.slice(4, 6) : clean.slice(0, 3);
-                    const detected = phonePrefixCityMap[prefix3];
-                    if (detected && allCityNames.includes(detected)) {
-                      next.city = detected;
-                      next.secteur = "";
+            <div className="relative">
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setForm((prev) => {
+                    const next = { ...prev, phone: val };
+                    if (!prev.city) {
+                      const clean = val.replace(/\s/g, "");
+                      const prefix3 = clean.startsWith("+212") ? "0" + clean.slice(4, 6) : clean.slice(0, 3);
+                      const detected = phonePrefixCityMap[prefix3];
+                      if (detected && allCityNames.includes(detected)) {
+                        next.city = detected;
+                        next.secteur = "";
+                      }
                     }
-                  }
-                  return next;
-                });
-              }}
-              placeholder="06XXXXXXXX"
-              dir="ltr"
-              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors text-left"
-              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
-            />
+                    return next;
+                  });
+                }}
+                onBlur={() => markTouched("phone")}
+                placeholder="06XXXXXXXX"
+                dir="ltr"
+                className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors text-left"
+                style={{ background: "#0F172A", border: `1px solid ${fieldErrors.phone ? "#EF4444" : touched.phone && isPhoneValid ? "#22C55E" : "rgba(13,148,136,0.3)"}`, color: "#F1F5F9" }}
+              />
+              {touched.phone && isPhoneValid && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#22C55E", fontSize: 18 }}>✓</span>}
+            </div>
+            {fieldErrors.phone && <p className="font-body text-xs mt-1.5" style={{ color: "#EF4444" }}>{fieldErrors.phone}</p>}
           </div>
 
           {/* City - Searchable Dropdown */}
           <div ref={cityRef} className="relative">
             <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>المدينة *</label>
-            <button
-              type="button"
-              onClick={() => { setCityOpen(!cityOpen); setCitySearch(""); }}
-              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors flex items-center justify-between"
-              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
-            >
-              <span style={{ color: form.city ? "#F1F5F9" : "rgba(255,255,255,0.3)" }}>
-                {form.city || "اختاري المدينة"}
-              </span>
-              <ChevronSvg className={`transition-transform ${cityOpen ? "rotate-180" : ""}`} style={{ color: "rgba(255,255,255,0.4)" }} />
-            </button>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => { setCityOpen(!cityOpen); setCitySearch(""); markTouched("city"); }}
+                className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors flex items-center justify-between"
+                style={{ background: "#0F172A", border: `1px solid ${fieldErrors.city ? "#EF4444" : isCityValid ? "#22C55E" : "rgba(13,148,136,0.3)"}`, color: "#F1F5F9" }}
+              >
+                <span style={{ color: form.city ? "#F1F5F9" : "rgba(255,255,255,0.3)" }}>
+                  {form.city || "اختاري المدينة"}
+                </span>
+                <ChevronSvg className={`transition-transform ${cityOpen ? "rotate-180" : ""}`} style={{ color: "rgba(255,255,255,0.4)" }} />
+              </button>
+              {isCityValid && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#22C55E", fontSize: 18 }}>✓</span>}
+            </div>
+            {fieldErrors.city && <p className="font-body text-xs mt-1.5" style={{ color: "#EF4444" }}>{fieldErrors.city}</p>}
 
             {cityOpen && (
               <div className="absolute z-50 top-full mt-1 w-full rounded-xl overflow-hidden shadow-lg max-h-[400px]" style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)" }}>
