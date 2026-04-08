@@ -41,6 +41,19 @@ const offerPriceMap: Record<string, number> = {
   "4-boxes-399": 399,
 };
 
+const phonePrefixCityMap: Record<string, string> = {
+  "061": "Casablanca",
+  "062": "Fes",
+  "063": "Marrakech",
+  "064": "Agadir",
+  "065": "Tétouan",
+  "066": "Tanger",
+  "067": "El Jadida",
+  "068": "Sale",
+  "069": "Sidi Kacem",
+  "070": "Khenifra",
+};
+
 const OrderForm = () => {
   const { cities: dbCities, loading: citiesLoading, error: citiesError } = useCities();
   const [form, setForm] = useState({
@@ -183,7 +196,23 @@ const OrderForm = () => {
             <input
               type="tel"
               value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              onChange={(e) => {
+                const val = e.target.value;
+                setForm((prev) => {
+                  const next = { ...prev, phone: val };
+                  // Auto-detect city from phone prefix (only if city not yet chosen)
+                  if (!prev.city) {
+                    const clean = val.replace(/\s/g, "");
+                    const prefix3 = clean.startsWith("+212") ? "0" + clean.slice(4, 6) : clean.slice(0, 3);
+                    const detected = phonePrefixCityMap[prefix3];
+                    if (detected && allCityNames.includes(detected)) {
+                      next.city = detected;
+                      next.secteur = "";
+                    }
+                  }
+                  return next;
+                });
+              }}
               placeholder="06XXXXXXXX"
               dir="ltr"
               className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors text-left"
