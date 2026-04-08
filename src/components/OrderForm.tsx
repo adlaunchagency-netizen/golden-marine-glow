@@ -117,7 +117,7 @@ const OrderForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setTouched({ customer_name: true, phone: true, city: true });
 
     if (!form.customer_name.trim() || !form.phone.trim() || !form.city) {
       setError("المرجو ملء جميع الحقول المطلوبة");
