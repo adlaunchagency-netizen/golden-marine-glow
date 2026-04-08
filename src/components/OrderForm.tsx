@@ -41,6 +41,19 @@ const offerPriceMap: Record<string, number> = {
   "4-boxes-399": 399,
 };
 
+const phonePrefixCityMap: Record<string, string> = {
+  "061": "Casablanca",
+  "062": "Fes",
+  "063": "Marrakech",
+  "064": "Agadir",
+  "065": "Tétouan",
+  "066": "Tanger",
+  "067": "El Jadida",
+  "068": "Sale",
+  "069": "Sidi Kacem",
+  "070": "Khenifra",
+};
+
 const OrderForm = () => {
   const { cities: dbCities, loading: citiesLoading, error: citiesError } = useCities();
   const [form, setForm] = useState({
