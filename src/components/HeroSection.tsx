@@ -12,8 +12,8 @@ const HeroSection = () => {
         {/* Left column — text */}
         <div style={{ padding: "28px 20px 24px", flex: 1 }}>
           {/* Stars */}
-          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 14 }}>
-            <span style={{ color: "#F59E0B", fontSize: 14, letterSpacing: 1 }}>★★★★★</span>
+          <div aria-label="تقييم 4.9 من 5" style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 14, pointerEvents: "none", userSelect: "none", cursor: "default" }}>
+            <span style={{ color: "#F59E0B", fontSize: 14, letterSpacing: 1 }} aria-hidden="true">★★★★★</span>
             <span style={{ fontSize: 12, color: "var(--soft-text)" }}>4.9/5</span>
             <span style={{ fontSize: 12, color: "var(--soft-text)" }}>(892 تقييم)</span>
             <span style={{ width: 6, height: 6, background: "#0D9488", borderRadius: "50%", display: "inline-block" }} />
