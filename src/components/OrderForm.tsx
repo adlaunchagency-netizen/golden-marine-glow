@@ -246,17 +246,21 @@ const OrderForm = () => {
           {/* City - Searchable Dropdown */}
           <div ref={cityRef} className="relative">
             <label className="block font-body text-sm font-medium mb-2" style={{ color: "#F1F5F9" }}>المدينة *</label>
-            <button
-              type="button"
-              onClick={() => { setCityOpen(!cityOpen); setCitySearch(""); }}
-              className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors flex items-center justify-between"
-              style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)", color: "#F1F5F9" }}
-            >
-              <span style={{ color: form.city ? "#F1F5F9" : "rgba(255,255,255,0.3)" }}>
-                {form.city || "اختاري المدينة"}
-              </span>
-              <ChevronSvg className={`transition-transform ${cityOpen ? "rotate-180" : ""}`} style={{ color: "rgba(255,255,255,0.4)" }} />
-            </button>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => { setCityOpen(!cityOpen); setCitySearch(""); markTouched("city"); }}
+                className="w-full rounded-xl px-4 py-3 min-h-[56px] font-body focus:outline-none transition-colors flex items-center justify-between"
+                style={{ background: "#0F172A", border: `1px solid ${fieldErrors.city ? "#EF4444" : isCityValid ? "#22C55E" : "rgba(13,148,136,0.3)"}`, color: "#F1F5F9" }}
+              >
+                <span style={{ color: form.city ? "#F1F5F9" : "rgba(255,255,255,0.3)" }}>
+                  {form.city || "اختاري المدينة"}
+                </span>
+                <ChevronSvg className={`transition-transform ${cityOpen ? "rotate-180" : ""}`} style={{ color: "rgba(255,255,255,0.4)" }} />
+              </button>
+              {isCityValid && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#22C55E", fontSize: 18 }}>✓</span>}
+            </div>
+            {fieldErrors.city && <p className="font-body text-xs mt-1.5" style={{ color: "#EF4444" }}>{fieldErrors.city}</p>}
 
             {cityOpen && (
               <div className="absolute z-50 top-full mt-1 w-full rounded-xl overflow-hidden shadow-lg max-h-[400px]" style={{ background: "#0F172A", border: "1px solid rgba(13,148,136,0.3)" }}>
